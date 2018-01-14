@@ -11,7 +11,7 @@
                          BackgroundColor="LightGoldenrodYellow"
                          Padding="20"
                          Margin="5">
-                <Button Text="Bestel" 
+                <Button Text="Voeg toe" 
                         BackgroundColor="Moccasin" 
                         Command="{Binding AddProductToOrder}"/>
 

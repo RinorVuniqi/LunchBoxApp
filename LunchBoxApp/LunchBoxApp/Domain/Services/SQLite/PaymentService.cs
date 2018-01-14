@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LunchBoxApp.Domain.Models;
 
-namespace LunchBoxApp.Domain.Services.Mock
+namespace LunchBoxApp.Domain.Services.SQLite
 {
     public class PaymentService : IPaymentService
     {

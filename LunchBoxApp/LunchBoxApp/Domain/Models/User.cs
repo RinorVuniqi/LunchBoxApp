@@ -7,7 +7,7 @@ namespace LunchBoxApp.Domain.Models
 {
     public class User
     {
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         public Guid UserId { get; set; }
 
         [NotNull, MaxLength(50)]

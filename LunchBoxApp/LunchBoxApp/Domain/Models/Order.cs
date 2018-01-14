@@ -8,7 +8,7 @@ namespace LunchBoxApp.Domain.Models
 {
     public class Order
     {
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         public Guid OrderId { get; set; }
 
         [NotNull]
@@ -17,13 +17,13 @@ namespace LunchBoxApp.Domain.Models
         [NotNull]
         public int OrderTotalProductCount { get; set; }
 
-        [NotNull]
+        [Ignore, NotNull]
         public Payment OrderPayment { get; set; }
 
         [MaxLength(50)]
         public string OrderCompanyName { get; set; }
 
-        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        [Ignore, OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Product> Products { get; set; }
     }
 }

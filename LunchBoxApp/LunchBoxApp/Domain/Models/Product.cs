@@ -34,12 +34,13 @@ namespace LunchBoxApp.Domain.Models
         [NotNull]
         public string ImageUrl { get; set; }
 
+        [Ignore, OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<string> Ingredients { get; set; }
 
         [ForeignKey(typeof(Subcategory))]
         public Guid SubcategoryId { get; set; }
 
-        [ManyToOne(nameof(SubcategoryId))]
+        [Ignore, ManyToOne(nameof(SubcategoryId))]
         public Subcategory Subcategory { get; set; }
     }
 }

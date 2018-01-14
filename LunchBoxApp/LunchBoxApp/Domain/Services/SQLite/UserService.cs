@@ -5,26 +5,31 @@ using System.Text;
 using System.Threading.Tasks;
 using LunchBoxApp.Domain.Models;
 using LunchBoxApp.Domain.Services.Abstract;
+using LunchBoxApp.Domain.Services.SQLite;
 
-namespace LunchBoxApp.Domain.Services.Mock
+namespace LunchBoxApp.Domain.Services.SQLite
 {
-    public class UserService : IUserService
+    public class UserService : SQLiteServiceBase, IUserService
     {
-        /// <summary>
-        /// Generate users
-        /// </summary>
-        private static readonly List<User> Users = new List<User>()
+        private static List<User> Users = new List<User>();
+
+        public UserService()
         {
-            new User
+            try
             {
-                UserId = Guid.NewGuid(),
-                UserName = "Rinor",
-                UserFirstName = "Rinor",
-                UserLastName = "Vuniqi",
-                UserEmail = "rinor.vuniqi@hotmail.com",
-                UserPassword = "rinor556"
+                Users = connection.Table<User>().ToList();
+
+                if (Users.Count == 0)
+                {
+                    GenerateData();
+                    Users = connection.Table<User>().ToList();
+                }
             }
-        };
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
 
         /// <summary>
         /// Returns all existing users
@@ -63,6 +68,18 @@ namespace LunchBoxApp.Domain.Services.Mock
             await Task.Delay(0);
             var oldUser = Users.FirstOrDefault(i => i.UserId == user.UserId);
             oldUser = user;
+
+
+            //Dropping & recreating table here because "InsertOrReplace" always inserts, it isn't replacing
+            connection.DropTable<User>();
+            connection.CreateTable<User>();
+
+            foreach (var _user in Users)
+            {
+                connection.InsertOrReplace(_user);
+            }
+
+            var test = connection.Table<User>().ToList();
         }
 
         /// <summary>
@@ -74,6 +91,27 @@ namespace LunchBoxApp.Domain.Services.Mock
         {
             await Task.Delay(0);
             Users.Add(user);
+            connection.InsertOrReplace(user);
+        }
+
+        private void GenerateData()
+        {
+            try
+            {
+                connection.Insert(new User
+                {
+                    UserId = Guid.NewGuid(),
+                    UserName = "Rinor",
+                    UserFirstName = "Rinor",
+                    UserLastName = "Vuniqi",
+                    UserEmail = "rinor.vuniqi@hotmail.com",
+                    UserPassword = "rinor556"
+                });
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using LunchBoxApp.Domain.Models;
 using LunchBoxApp.Domain.Services.Abstract;
 
-namespace LunchBoxApp.Domain.Services.Mock
+namespace LunchBoxApp.Domain.Services.SQLite
 {
     public class OrderService : IOrderService
     {
