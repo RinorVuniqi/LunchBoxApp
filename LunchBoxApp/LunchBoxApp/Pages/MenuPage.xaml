@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<freshMvvm:FreshBaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:freshMvvm="clr-namespace:FreshMvvm;assembly=FreshMvvm"
+             xmlns:pages="clr-namespace:LunchBoxApp.Pages;assembly=LunchBoxApp"
+             x:Class="LunchBoxApp.Pages.MenuPage"
+                                BackgroundColor="Orange">
+    <pages:MenuPage.ToolbarItems>
+        <ToolbarItem Text="Reset order 	&#x2672;  " Command="{Binding ResetOrder}" />
+    </pages:MenuPage.ToolbarItems>
+        
+    <ContentPage.Content>
+        <ScrollView Margin="5">
+            <StackLayout VerticalOptions="Start"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="LightGoldenrodYellow"
+                         Padding="20"
+                         Margin="5">
+                
+                <StackLayout Orientation="Horizontal" 
+                             BackgroundColor="LightYellow">
+                    <StackLayout Orientation="Vertical" 
+                                 Margin="2">
+                        <Label Text="Aantal producten:"/>
+                        <Label Text="Totaale prijs:"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" Margin="2">
+                        <Label Text="{Binding TotalProductsInOrderedProducts}" 
+                               HorizontalOptions="EndAndExpand"/>
+                        <Label Text="{Binding TotalPriceInOrderedProducts, StringFormat='€ {0:N}'}" 
+                               HorizontalOptions="EndAndExpand"/>
+                    </StackLayout>
+                    <Button Text="Bestel!" 
+                            Command ="{Binding FinishCurrentOrder}"
+                            IsVisible="{Binding OrderButtonVisible}"
+                            BackgroundColor="Moccasin" 
+                            HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <BoxView HeightRequest="1" 
+                         BackgroundColor="DarkGray"/>
+
+                <ListView ItemsSource="{Binding Categories}" 
+                          SelectedItem="{Binding SelectedCategory}" 
+                          BackgroundColor="LightGoldenrodYellow" 
+                          HeightRequest="{Binding CategoryHeight}" 
+                          SeparatorColor="LightGray">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding CategoryName}" 
+                                           Margin="5"
+                                           FontSize="20" 
+                                           FontAttributes="Bold"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <BoxView HeightRequest="1" 
+                         BackgroundColor="DarkGray"/>
+
+                <ListView ItemsSource="{Binding Subcategories}" 
+                          SelectedItem="{Binding SelectedSubcategory}" 
+                          BackgroundColor="LightGoldenrodYellow" 
+                          HeightRequest="{Binding SubcategoryHeight}"
+                          ItemTapped="ListView_OnItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding ImageUrl}"
+                                           Margin="5" 
+                                           HeightRequest="50"/>
+                                    <Label Text="{Binding SubcategoryName}" 
+                                           Margin="5" 
+                                           FontSize="18" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <BoxView HeightRequest="1" 
+                         BackgroundColor="DarkGray"/>
+
+                <ListView ItemsSource="{Binding Products}" 
+                          SelectedItem="{Binding SelectedProduct}" 
+                          BackgroundColor="LightGoldenrodYellow" 
+                          HeightRequest="{Binding ProductHeight}" 
+                          ItemTapped="ListView_OnItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell >
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding ImageUrl}" 
+                                           Margin="5" 
+                                           HeightRequest="50"/>
+                                    <Label Text="{Binding ProductName}" 
+                                           Margin="5" 
+                                           FontSize="14"/>
+
+                                    <Label Text="{Binding ProductPrice, StringFormat='€ {0:N}'}" 
+                                           VerticalOptions="Start" 
+                                           HorizontalOptions="EndAndExpand" Margin="5"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</freshMvvm:FreshBaseContentPage>

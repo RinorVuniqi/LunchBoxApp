@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<freshMvvm:FreshBaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:freshMvvm="clr-namespace:FreshMvvm;assembly=FreshMvvm"
+             x:Class="LunchBoxApp.Pages.ProductPage"
+                                BackgroundColor="Orange">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="Start"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="LightGoldenrodYellow"
+                         Padding="20"
+                         Margin="5">
+                <Button Text="Bestel" 
+                        BackgroundColor="Moccasin" 
+                        Command="{Binding AddProductToOrder}"/>
+
+                <StackLayout Orientation="Horizontal">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="Start">
+                        <Label Text="{Binding ProductName}" 
+                               FontSize="18"/>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" WidthRequest="200">
+                            <Label Text="Aantal:" FontSize="15" 
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="Start"/>
+                            <Button Text="&#x25C4;" WidthRequest="30" BackgroundColor="Moccasin" Command="{Binding DecreaseQuantity}"/>
+                            <Entry Text="{Binding ProductQuantity}" 
+                                   Keyboard="Numeric" 
+                                   BackgroundColor="LightYellow" 
+                                   IsEnabled="False"
+                                   HorizontalTextAlignment="Center"
+                                   HorizontalOptions="CenterAndExpand"
+                                   WidthRequest="35"/>
+                            <Button Text="&#x25BA;" WidthRequest="30" BackgroundColor="Moccasin" Command="{Binding IncreaseQuantity}"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <Image Source="{Binding ProductImageUrl}" 
+                           HorizontalOptions="EndAndExpand" 
+                           VerticalOptions="CenterAndExpand" 
+                           HeightRequest="130" 
+                           WidthRequest="130"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Naam:" Margin="0, 0, 20, 0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                    <Entry Placeholder="Naam (optioneel)" Text="{Binding ProductPersonName}" 
+                           HorizontalOptions="FillAndExpand" 
+                           BackgroundColor="LightYellow" />
+                </StackLayout>
+
+
+                <StackLayout Orientation="Horizontal" IsVisible="{Binding IngredientsVisible}">
+                    <Label Text="Meergranen broodje (+ 30 cent)" Margin="0, 0, 20, 0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
+                    <Switch IsToggled="{Binding ProductMultigrain}" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+
+                <Picker Title="Ingredienten weglaten"
+                        ItemsSource="{Binding Ingredients}"
+                        SelectedItem="{Binding SelectedItem}" 
+                        BackgroundColor="LightYellow"
+                        HorizontalOptions="Fill"
+                        IsVisible="{Binding IngredientsVisible}"/>
+
+                <Label Text="Extra opmerking:" HorizontalOptions="Start" VerticalOptions="End"/>
+                <Editor Text="{Binding ProductNote}" 
+                        HeightRequest="113" 
+                        BackgroundColor="LightYellow" 
+                        Margin="10"/>
+
+                <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                    <Label Text="Prijs:" 
+                           FontSize="15" 
+                           HorizontalOptions="StartAndExpand"/>
+                    <Label Text=""/>
+                    <Label Text="{Binding TotalProductPrice, StringFormat='€ {0:N}'}" 
+                           HorizontalOptions="End" 
+                           HeightRequest="15"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</freshMvvm:FreshBaseContentPage>

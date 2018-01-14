@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<freshMvvm:FreshBaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:freshMvvm="clr-namespace:FreshMvvm;assembly=FreshMvvm"
+             x:Class="LunchBoxApp.Pages.RegisterPage"
+                                BackgroundColor="Orange">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="LightGoldenrodYellow"
+                         Padding="20"
+                         Margin="10">
+
+            <Label Text="RegisterPage" 
+                   TextColor="Black" 
+                   FontSize="25"/>
+
+            <Entry Text="{Binding Username}" 
+                   Placeholder="Gebruikersnaam"/>
+
+            <Label Text="{Binding UserUsernameError}"
+                       IsVisible="{Binding UserUsernameErrorVisible}"
+                       FontSize="12"
+                       TextColor="Red"/>
+
+            <Entry Text="{Binding Email}" 
+                       Placeholder="Email"
+                       Keyboard="Email"/>
+
+            <Label Text="{Binding UserEmailError}"
+                       IsVisible="{Binding UserEmailErrorVisible}"
+                       FontSize="12"
+                       TextColor="Red"/>
+
+            <Entry Text="{Binding FirstName}" 
+                       Placeholder="Voornaam"/>
+
+            <Label Text="{Binding UserFirstNameError}"
+                       IsVisible="{Binding UserFirstNameErrorVisible}"
+                       FontSize="12"
+                       TextColor="Red"/>
+
+            <Entry Text="{Binding LastName}" 
+                   Placeholder="Achternaam"/>
+
+            <Label Text="{Binding UserLastNameError}"
+                       IsVisible="{Binding UserLastNameErrorVisible}"
+                       FontSize="12"
+                       TextColor="Red"/>
+
+            <Entry Text="{Binding Password1}"
+                       Placeholder="Wachtwoord"
+                       IsPassword="True"/>
+
+            <Entry Text="{Binding Password2}"
+                       Placeholder="Wachtwoord"
+                       IsPassword="True"/>
+
+            <Label Text="{Binding UserPasswordError}"
+                       IsVisible="{Binding UserPasswordErrorVisible}"
+                       FontSize="12"
+                       TextColor="Red"/>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+
+                <Button Text="Terug" 
+                            HorizontalOptions="FillAndExpand"
+                            BackgroundColor="Moccasin"
+                            Command="{Binding PopCurrentPage}"/>
+
+                <Button Text="Indienen"
+                            HorizontalOptions="FillAndExpand"
+                            BackgroundColor="Moccasin"
+                            Command="{Binding CreateNewUser}"/>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</freshMvvm:FreshBaseContentPage>

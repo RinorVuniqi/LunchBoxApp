@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<freshMvvm:FreshBaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:freshMvvm="clr-namespace:FreshMvvm;assembly=FreshMvvm"
+             xmlns:pages="clr-namespace:LunchBoxApp.Pages;assembly=LunchBoxApp"
+             x:Class="LunchBoxApp.Pages.OrderPage"
+                                BackgroundColor="Orange">
+
+    <pages:OrderPage.ToolbarItems>
+        <ToolbarItem Text="Delete product &#x1F5D1;  " Command="{Binding DeleteSelectedProduct}" />
+    </pages:OrderPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <ScrollView Margin="5">
+            <StackLayout VerticalOptions="Start"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="LightGoldenrodYellow"
+                         Padding="20"
+                         Margin="5">
+                <ActivityIndicator Color="Black" 
+                                   IsRunning="{Binding ActivityIndicatorVisible}" 
+                                   IsVisible="{Binding ActivityIndicatorVisible}"/>
+                <ScrollView>
+                    <ListView ItemsSource="{Binding OrderedProducts}"
+                              SelectedItem="{Binding SelectedProduct}"
+                              BackgroundColor="LightYellow"
+                              HeightRequest="200">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" Margin="0, 0, 5, 0">
+                                        <Image Source="{Binding ImageUrl}" 
+                                               Margin="5" 
+                                               HeightRequest="50"/>
+                                        <Label Text="{Binding ProductName}" 
+                                               Margin="5" 
+                                               FontSize="14"/>
+                                        <StackLayout HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
+                                            <Label Text="{Binding ProductPrice, StringFormat='€ {0:N}'}" 
+                                                   VerticalOptions="Start"/>
+                                            <Label Text="{Binding ProductQuantity, StringFormat='Aantal: {0}'}" VerticalOptions="StartAndExpand"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollView>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="{Binding OrderTotalCount, StringFormat='Aantal artikels: {0}'}" HorizontalOptions="Start" Margin="0, 0, 10, 0"/>
+                    <Label Text="{Binding OrderTotalPrice, StringFormat='Prijs: € {0:N}'}" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+
+                <BoxView HeightRequest="1" 
+                         BackgroundColor="DarkGray"/>
+                <Label Text="Betaalmethode: "/>
+                <Picker ItemsSource="{Binding PaymentNames}" SelectedItem="{Binding SelectedPayment}" BackgroundColor="LightYellow"/>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Ter plaatse komen leveren:" HorizontalOptions="Start"/>
+                    <Switch IsToggled="{Binding DeliverToCompany}" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <Entry Text="{Binding CompanyName}" Placeholder="Bedrijfsnaam" IsVisible="{Binding DeliverToCompany}" BackgroundColor="LightYellow"/>
+
+                <Button Text="Bestel!" BackgroundColor="Moccasin" Command="{Binding SubmitOrder}" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</freshMvvm:FreshBaseContentPage>

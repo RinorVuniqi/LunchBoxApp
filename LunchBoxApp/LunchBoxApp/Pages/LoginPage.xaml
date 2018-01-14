@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<freshMvvm:FreshBaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:freshMvvm="clr-namespace:FreshMvvm;assembly=FreshMvvm"
+             x:Class="LunchBoxApp.Pages.LoginPage"
+                                BackgroundColor="Orange">
+    <ContentPage.Content>
+        <ScrollView Margin="5">
+            <StackLayout VerticalOptions="Start"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="LightGoldenrodYellow"
+                         Padding="20"
+                         Margin="5">
+                
+                <Label Text="LoginPage" 
+                       TextColor="Black" 
+                       FontSize="40"/>
+
+                <Entry Text="{Binding Username}" 
+                   Placeholder="Gebruikersnaam"/>
+
+                <Entry Text="{Binding Password}"
+                       Placeholder="Wachtwoord"
+                       IsPassword="True"/>
+
+                <Label Text="{Binding LoginErrorMessage}"
+                       TextColor="Red"
+                       IsVisible="{Binding LoignErrorMessageVisible}"/>
+
+                <Button Text="Aanmelden" 
+                        BackgroundColor="Moccasin"
+                        Command="{Binding LogUserIn}"/>
+
+                <Button Text="Geen lid? Registreer je hier!"
+                        BackgroundColor="Moccasin"
+                        Command="{Binding RegisterNewUser}"/>
+                
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</freshMvvm:FreshBaseContentPage>
