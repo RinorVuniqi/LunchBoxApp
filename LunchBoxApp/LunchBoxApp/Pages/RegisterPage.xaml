@@ -5,75 +5,77 @@
              x:Class="LunchBoxApp.Pages.RegisterPage"
                                 BackgroundColor="Orange">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand"
+        <ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand"
                          HorizontalOptions="FillAndExpand"
                          BackgroundColor="LightGoldenrodYellow"
                          Padding="20"
                          Margin="10">
 
-            <Label Text="RegisterPage" 
+                <Label Text="RegisterPage" 
                    TextColor="Black" 
                    FontSize="25"/>
 
-            <Entry Text="{Binding Username}" 
+                <Entry Text="{Binding Username}" 
                    Placeholder="Gebruikersnaam"/>
 
-            <Label Text="{Binding UserUsernameError}"
+                <Label Text="{Binding UserUsernameError}"
                        IsVisible="{Binding UserUsernameErrorVisible}"
                        FontSize="12"
                        TextColor="Red"/>
 
-            <Entry Text="{Binding Email}" 
+                <Entry Text="{Binding Email}" 
                        Placeholder="Email"
                        Keyboard="Email"/>
 
-            <Label Text="{Binding UserEmailError}"
+                <Label Text="{Binding UserEmailError}"
                        IsVisible="{Binding UserEmailErrorVisible}"
                        FontSize="12"
                        TextColor="Red"/>
 
-            <Entry Text="{Binding FirstName}" 
+                <Entry Text="{Binding FirstName}" 
                        Placeholder="Voornaam"/>
 
-            <Label Text="{Binding UserFirstNameError}"
+                <Label Text="{Binding UserFirstNameError}"
                        IsVisible="{Binding UserFirstNameErrorVisible}"
                        FontSize="12"
                        TextColor="Red"/>
 
-            <Entry Text="{Binding LastName}" 
+                <Entry Text="{Binding LastName}" 
                    Placeholder="Achternaam"/>
 
-            <Label Text="{Binding UserLastNameError}"
+                <Label Text="{Binding UserLastNameError}"
                        IsVisible="{Binding UserLastNameErrorVisible}"
                        FontSize="12"
                        TextColor="Red"/>
 
-            <Entry Text="{Binding Password1}"
+                <Entry Text="{Binding Password1}"
                        Placeholder="Wachtwoord"
                        IsPassword="True"/>
 
-            <Entry Text="{Binding Password2}"
+                <Entry Text="{Binding Password2}"
                        Placeholder="Wachtwoord"
                        IsPassword="True"/>
 
-            <Label Text="{Binding UserPasswordError}"
+                <Label Text="{Binding UserPasswordError}"
                        IsVisible="{Binding UserPasswordErrorVisible}"
                        FontSize="12"
                        TextColor="Red"/>
 
-            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
 
-                <Button Text="Terug" 
+                    <Button Text="&#x25C0;  Terug" 
                             HorizontalOptions="FillAndExpand"
                             BackgroundColor="Moccasin"
                             Command="{Binding PopCurrentPage}"/>
 
-                <Button Text="Indienen"
+                    <Button Text="Indienen"
                             HorizontalOptions="FillAndExpand"
                             BackgroundColor="Moccasin"
                             Command="{Binding CreateNewUser}"/>
 
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </freshMvvm:FreshBaseContentPage>

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using FreshMvvm;
 using LunchBoxApp.Domain.Models;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 
 namespace LunchBoxApp.PageModels
@@ -82,12 +83,12 @@ namespace LunchBoxApp.PageModels
                 if (value)
                 {
                     ProductPrice += 0.30m;
-                    ProductNote = ProductNote + "-Meergranenbrood" + Environment.NewLine;
+                    ProductNote = ProductNote + "-Meergranenbrood\n";
                 }
                 else
                 {
                     ProductPrice -= 0.30m;
-                    ProductNote = ProductNote.Replace("-Meergranenbrood" + Environment.NewLine, "");
+                    ProductNote = ProductNote.Replace("-Meergranenbrood\n", "");
                 }
                 
                 RaisePropertyChanged();
@@ -105,15 +106,15 @@ namespace LunchBoxApp.PageModels
 
                 if (_selectedItem != null)
                 {
-                    string editIngredient = $"-Geen {value}";
+                    string editIngredient = $"-Geen {value}\n";
 
                     if (ProductNote.Contains(editIngredient))
                     {
-                        ProductNote = ProductNote.Replace(editIngredient + Environment.NewLine, "");
+                        ProductNote = ProductNote.Replace(editIngredient, "");
                     }
                     else
                     {
-                        ProductNote = ProductNote + editIngredient + Environment.NewLine;
+                        ProductNote = ProductNote + editIngredient;
                     }
 
                     _selectedItem = null;
@@ -135,7 +136,8 @@ namespace LunchBoxApp.PageModels
             {
                 ProductName = Product.ProductName;
                 ProductImageUrl = Product.ImageUrl;
-                Ingredients = Product.Ingredients;
+                //Converts the JSON IngredientsBlobbed into a string list (if it exists) - else the Ingredients are null
+                Ingredients = Product.IngredientsBlobbed != null ? JsonConvert.DeserializeObject<List<string>>(Product.IngredientsBlobbed) : null;
                 IngredientsVisible = Ingredients != null;
                 ProductNote = "";
                 ProductQuantity = 1;

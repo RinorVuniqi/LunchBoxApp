@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using LunchBoxApp.Domain.Models;
 using LunchBoxApp.Domain.Services.Abstract;
+using Newtonsoft.Json;
 
 namespace LunchBoxApp.Domain.Services.SQLite
 {
@@ -69,8 +69,8 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje kaas",
-                    Ingredients = new List<string>() {"kaas", "mayo", "sla", "ei", "komkommer", "wortel"},
-                    ImageUrl = "test.jpg",
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"kaas", "mayo", "sla", "ei", "komkommer", "wortel"}),
+                    ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = "Eeaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
                     ProductPrice = 3.20m,
                     SubcategoryId = new Constants().Subcategory1Guid,
@@ -81,7 +81,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje brie",
-                    Ingredients = new List<string>() {"brie", "notenmengeling", "honing", "rucola"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"brie", "notenmengeling", "honing", "rucola"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.90m,
@@ -92,7 +92,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje mozarella",
-                    Ingredients = new List<string>() {"mozarella", "tomaat", "zongedr. tomaat", "pesto", "rucola"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"mozarella", "tomaat", "zongedr. tomaat", "pesto", "rucola"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.70m,
@@ -103,7 +103,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje kruidenkaas",
-                    Ingredients = new List<string>() {"kruidenkaas", "rucola", "zongedr. tomaat"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"kruidenkaas", "rucola", "zongedr. tomaat"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.90m,
@@ -114,7 +114,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje tonijn",
-                    Ingredients = new List<string>() {"tonijnsla", "sla", "wortel", "komkommer", "tomaat", "ei"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"tonijnsla", "sla", "wortel", "komkommer", "tomaat", "ei"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.40m,
@@ -125,7 +125,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje tonijntino",
-                    Ingredients = new List<string>() {"tonijnsla", "martinosaus", "mosterd", "ansjovis", "sla", "tomaat", "komkommer", "ei"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"tonijnsla", "martinosaus", "mosterd", "ansjovis", "sla", "tomaat", "komkommer", "ei"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.90m,
@@ -136,7 +136,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje krab",
-                    Ingredients = new List<string>() {"krabsla", "sla", "komkommer", "tomaat", "ei"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"krabsla", "sla", "komkommer", "tomaat", "ei"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.80m,
@@ -147,7 +147,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje gerookte zalm",
-                    Ingredients = new List<string>() {"gerookte zalm", "ui", "sla", "mayo"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"gerookte zalm", "ui", "sla", "mayo"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 4.50m,
@@ -158,7 +158,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje kruidenzalm",
-                    Ingredients = new List<string>() {"gerookte zalm", "kruidenkaas", "sla", "zongedr. tomaat"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"gerookte zalm", "kruidenkaas", "sla", "zongedr. tomaat"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 4.70m,
@@ -169,7 +169,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje kabeljauwsla",
-                    Ingredients = new List<string>() {"kabeljauwsla", "tomaat", "komkommer", "sla"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"kabeljauwsla", "tomaat", "komkommer", "sla"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 4.60m,
@@ -180,7 +180,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje ham",
-                    Ingredients = new List<string>() {"ham", "mayo", "sla", "tomaat", "ei", "komkommer", "wortel"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"ham", "mayo", "sla", "tomaat", "ei", "komkommer", "wortel"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.20m,
@@ -191,7 +191,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje smos",
-                    Ingredients = new List<string>() {"ham", "kaas", "mayo", "sla", "tomaat", "ei", "komkommer", "wortel"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"ham", "kaas", "mayo", "sla", "tomaat", "ei", "komkommer", "wortel"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.50m,
@@ -202,7 +202,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje prepare",
-                    Ingredients = new List<string>() {"americain", "ui", "sla", "tomaat"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"americain", "ui", "sla", "tomaat"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.10m,
@@ -213,7 +213,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje martino",
-                    Ingredients = new List<string>() {"americain", "ui", "augurk", "martinosaus", "ansjovis", "mosterd"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"americain", "ui", "augurk", "martinosaus", "ansjovis", "mosterd"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.70m,
@@ -224,7 +224,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje bicky",
-                    Ingredients = new List<string>() {"americain", "bickysaus", "geroosterde ui", "augurk", "sla", "tomaat"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"americain", "bickysaus", "geroosterde ui", "augurk", "sla", "tomaat"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.60m,
@@ -235,7 +235,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje bacon pepper",
-                    Ingredients = new List<string>() {"americain", "verse ui", "pepersaus", "spek", "tomaat", "sla"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"americain", "verse ui", "pepersaus", "spek", "tomaat", "sla"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 4.20m,
@@ -246,7 +246,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje salami",
-                    Ingredients = new List<string>() {"salami", "mayo", "sla", "tomaat", "wortel", "komkommer", "ei"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"salami", "mayo", "sla", "tomaat", "wortel", "komkommer", "ei"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.20m,
@@ -257,7 +257,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje serranoham",
-                    Ingredients = new List<string>() {"serranoham", "pesto", "permezaan", "rucola"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"serranoham", "pesto", "permezaan", "rucola"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 4.00m,
@@ -268,7 +268,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje pain de veau",
-                    Ingredients = new List<string>() {"vleesbrood", "sla", "tomaat", "komkommer", "mosterd"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"vleesbrood", "sla", "tomaat", "komkommer", "mosterd"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 4.10m,
@@ -279,7 +279,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje italiano",
-                    Ingredients = new List<string>() {"serranoham", "mozzarella", "pesto", "rucola", "zongedr. tomaat"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"serranoham", "mozzarella", "pesto", "rucola", "zongedr. tomaat"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 4.20m,
@@ -290,7 +290,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje vleessla",
-                    Ingredients = new List<string>() {"vleessla", "sla", "tomaat", "ei", "komkommer", "wortel"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"vleessla", "sla", "tomaat", "ei", "komkommer", "wortel"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.20m,
@@ -301,7 +301,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje carrero",
-                    Ingredients = new List<string>() {"warme mexicano", "tomaat", "sla", "geroosterde ui", "bickysaus"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"warme mexicano", "tomaat", "sla", "geroosterde ui", "bickysaus"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 4.50m,
@@ -312,7 +312,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje vleesbrood spec.",
-                    Ingredients = new List<string>() {"vleesbrood", "spek", "kaas", "tomaat", "sla", "curryketchup", "mayo"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"vleesbrood", "spek", "kaas", "tomaat", "sla", "curryketchup", "mayo"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 4.60m,
@@ -323,7 +323,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje kip maison",
-                    Ingredients = new List<string>() {"gebakken kip", "spek", "sla", "tomaat", "geroosterde uitjes", "giantsaus"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"gebakken kip", "spek", "sla", "tomaat", "geroosterde uitjes", "giantsaus"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 4.20m,
@@ -334,7 +334,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Broodje kip curry",
-                    Ingredients = new List<string>() {"kip curry", "sla", "tomaat", "wortel", "komkommer"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"kip curry", "sla", "tomaat", "wortel", "komkommer"}),
                     ImageUrl = "https://i.gyazo.com/72b598e9ca1b0103fa92ee903fd22f36.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.30m,
@@ -345,7 +345,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Panini kaas & ham",
-                    Ingredients = new List<string>() {"ham", "kaas", "tomaat"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"ham", "kaas", "tomaat"}),
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 4.20m,
@@ -356,7 +356,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Panini gerookte zalm",
-                    Ingredients = new List<string>() {"zalm", "kruidenkaas", "tomaat"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"zalm", "kruidenkaas", "tomaat"}),
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 6.00m,
@@ -367,7 +367,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Panini serranoham",
-                    Ingredients = new List<string>() {"serranoham", "pesto", "rucola", "mozarella", "zongedr. tomaat"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"serranoham", "pesto", "rucola", "mozarella", "zongedr. tomaat"}),
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 5.60m,
@@ -378,7 +378,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Panini drie kazen",
-                    Ingredients = new List<string>() {"jonge kaas", "mozarella", "brie", "pesto", "tomaat", "zongedr. tomaat", "basilicum"},
+                    IngredientsBlobbed = JsonConvert.SerializeObject(new List<string>() {"jonge kaas", "mozarella", "brie", "pesto", "tomaat", "zongedr. tomaat", "basilicum"}),
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 5.60m,
@@ -389,7 +389,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Groentensalade",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 5.50m,
@@ -400,7 +400,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Salade met kip",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 8.00m,
@@ -411,7 +411,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Salade met gerookte zalm",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 9.00m,
@@ -422,7 +422,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Salade met mozarella",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 8.00m,
@@ -433,7 +433,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Pasta bolognaise (S)",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 5.00m,
@@ -444,7 +444,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Pasta bolognaise (M)",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 6.00m,
@@ -455,7 +455,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Pasta bolognaise (L)",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 7.00m,
@@ -466,7 +466,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Pasta carbonara (S)",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 5.00m,
@@ -477,7 +477,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Pasta carbonara (M)",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 6.00m,
@@ -488,7 +488,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Pasta carbonara (L)",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 7.00m,
@@ -499,7 +499,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Pasta arrabiata (S)",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 5.00m,
@@ -510,7 +510,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Pasta arrabiata (M)",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 6.00m,
@@ -521,7 +521,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Pasta arrabiata (L)",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 7.00m,
@@ -532,7 +532,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Pasta vier kazen (S)",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 5.00m,
@@ -543,7 +543,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Pasta vier kazen (M)",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 6.00m,
@@ -554,7 +554,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Pasta vier kazen (L)",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 7.00m,
@@ -565,7 +565,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Worstenbroodje",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 2.20m,
@@ -576,7 +576,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Droge worst",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/6bfef0c5ecfa3d869d8ec3cdba5829a1.jpg",
                     ProductDescription = null,
                     ProductPrice = 1.20m,
@@ -587,7 +587,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Donut",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/91c009a2ed0474ae7bca046d9c9e835e.jpg",
                     ProductDescription = null,
                     ProductPrice = 1.40m,
@@ -598,7 +598,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Rijsttaartje",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/91c009a2ed0474ae7bca046d9c9e835e.jpg",
                     ProductDescription = null,
                     ProductPrice = 2.00m,
@@ -609,7 +609,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Chocoladekoek",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/91c009a2ed0474ae7bca046d9c9e835e.jpg",
                     ProductDescription = null,
                     ProductPrice = 1.20m,
@@ -620,7 +620,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Croissant",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/91c009a2ed0474ae7bca046d9c9e835e.jpg",
                     ProductDescription = null,
                     ProductPrice = 1.20m,
@@ -631,7 +631,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Ontbijt-Box",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/91c009a2ed0474ae7bca046d9c9e835e.jpg",
                     ProductDescription = null,
                     ProductPrice = 5.00m,
@@ -642,7 +642,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Thee",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/fd2b7d7808b734f3d3bcede09fdcd049.jpg",
                     ProductDescription = null,
                     ProductPrice = 2.20m,
@@ -653,7 +653,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Koffie",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/fd2b7d7808b734f3d3bcede09fdcd049.jpg",
                     ProductDescription = null,
                     ProductPrice = 2.20m,
@@ -664,7 +664,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Deca koffie",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/fd2b7d7808b734f3d3bcede09fdcd049.jpg",
                     ProductDescription = null,
                     ProductPrice = 2.20m,
@@ -675,7 +675,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Cappuccino",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/fd2b7d7808b734f3d3bcede09fdcd049.jpg",
                     ProductDescription = null,
                     ProductPrice = 2.50m,
@@ -686,7 +686,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Macchiato",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/fd2b7d7808b734f3d3bcede09fdcd049.jpg",
                     ProductDescription = null,
                     ProductPrice = 2.50m,
@@ -697,7 +697,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Warme chocolademelk",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/fd2b7d7808b734f3d3bcede09fdcd049.jpg",
                     ProductDescription = null,
                     ProductPrice = 2.50m,
@@ -708,7 +708,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Take away dagsoep 1/2 l.",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/fd2b7d7808b734f3d3bcede09fdcd049.jpg",
                     ProductDescription = null,
                     ProductPrice = 2.00m,
@@ -719,7 +719,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Take away dagsoep 1 l.",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/fd2b7d7808b734f3d3bcede09fdcd049.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.80m,
@@ -730,7 +730,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 {
                     ProductId = Guid.NewGuid(),
                     ProductName = "Take a seat dagsoep",
-                    Ingredients = null,
+                    IngredientsBlobbed = null,
                     ImageUrl = "https://i.gyazo.com/fd2b7d7808b734f3d3bcede09fdcd049.jpg",
                     ProductDescription = null,
                     ProductPrice = 3.00m,

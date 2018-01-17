@@ -12,6 +12,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
     public class UserService : SQLiteServiceBase, IUserService
     {
         private static List<User> Users = new List<User>();
+        private static User LoggedInUser;
 
         public UserService()
         {
@@ -53,9 +54,17 @@ namespace LunchBoxApp.Domain.Services.SQLite
             var user = Users.FirstOrDefault(u => u.UserName == username);
             if (user.UserPassword == password)
             {
+                LoggedInUser = new User();
+                LoggedInUser = user;
                 return user;
             }
             return null;
+        }
+
+        public async Task<User> GetCurrentUser()
+        {
+            await Task.Delay(0);
+            return LoggedInUser;
         }
 
         /// <summary>
@@ -68,7 +77,6 @@ namespace LunchBoxApp.Domain.Services.SQLite
             await Task.Delay(0);
             var oldUser = Users.FirstOrDefault(i => i.UserId == user.UserId);
             oldUser = user;
-
 
             //Dropping & recreating table here because "InsertOrReplace" always inserts, it isn't replacing
             connection.DropTable<User>();
@@ -91,6 +99,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
         {
             await Task.Delay(0);
             Users.Add(user);
+            LoggedInUser = user;
             connection.InsertOrReplace(user);
         }
 

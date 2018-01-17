@@ -15,6 +15,7 @@ namespace LunchBoxApp.PageModels
 {
     public class OrderPageModel : FreshBasePageModel
     {
+        private readonly IUserService _userService;
         private readonly IOrderService _orderService;
         private readonly IPaymentService _paymentService;
         private readonly ISoundPlayer _soundPlayer;
@@ -27,6 +28,7 @@ namespace LunchBoxApp.PageModels
         private string _selectedPayment;
         private string _companyName;
         private bool _activityIndicator;
+        private bool _orderProcessing;
 
         //Start Order & Ordered products
         public Order Order
@@ -69,6 +71,16 @@ namespace LunchBoxApp.PageModels
             }
         }
 
+        public bool OrderProcessing
+        {
+            get => _orderProcessing;
+            set
+            {
+                _orderProcessing = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public ObservableCollection<Payment> Payments { get; set; }
         public List<string> PaymentNames { get; set; }
 
@@ -99,6 +111,12 @@ namespace LunchBoxApp.PageModels
             set
             {
                 _deliverToCompany = value;
+
+                if (!value)
+                {
+                    CompanyName = "";
+                }
+
                 RaisePropertyChanged();
             }
         }
@@ -123,8 +141,9 @@ namespace LunchBoxApp.PageModels
             }
         }
 
-        public OrderPageModel(IOrderService orderService, IPaymentService paymentService, ISoundPlayer soundPlayer)
+        public OrderPageModel(IUserService userService, IOrderService orderService, IPaymentService paymentService, ISoundPlayer soundPlayer)
         {
+            _userService = userService;
             _orderService = orderService;
             _paymentService = paymentService;
             _soundPlayer = soundPlayer;
@@ -140,6 +159,7 @@ namespace LunchBoxApp.PageModels
                 OrderTotalPrice = Order.OrderTotalPrice;
                 OrderTotalCount = Order.OrderTotalProductCount;
                 ActivityIndicatorVisible = false;
+                OrderProcessing = true;
                 base.Init(initData);
             }
 
@@ -193,8 +213,10 @@ namespace LunchBoxApp.PageModels
                 return new Command(
                     async () =>
                     {
-                        if (string.IsNullOrEmpty(CompanyName))
+                        if (string.IsNullOrWhiteSpace(CompanyName))
                         {
+                            DeliverToCompany = false;
+                            CompanyName = "Lunchbox";
                             await _orderService.UpdateOrderCompany("Lunchbox");
                         }
                         else
@@ -204,19 +226,21 @@ namespace LunchBoxApp.PageModels
                         
                         await _orderService.UpdateOrderPayment(Payments.FirstOrDefault(p => p.PaymentName == SelectedPayment));
 
+                        OrderProcessing = false;
                         ActivityIndicatorVisible = true;
 
                         EmailService email = new EmailService();
                         bool emailSent = false;
 
-                        await Task.Run(async () => { emailSent = await email.SendEmail(_orderService.GetOrder().Result); });
+                        await Task.Run(async () => { emailSent = await email.SendEmail(_orderService.GetOrder().Result, _userService.GetCurrentUser().Result); });
 
                         ActivityIndicatorVisible = false;
 
                         if (emailSent)
                         {
                             await _soundPlayer.PlaySuccessSound();
-                            await CoreMethods.DisplayAlert("Succes", "De bestelling werd correct verzonden", "Ok");
+
+                            await CoreMethods.DisplayAlert("Succes", "De bestelling werd correct verzonden!", "Ok");
                             await _orderService.ClearOrderProducts();
                             await CoreMethods.PopPageModel();
                         }

@@ -54,7 +54,7 @@
 
                 <StackLayout Orientation="Horizontal">
 
-                    <Button Text="Terug" 
+                    <Button Text="&#x25C0;  Terug" 
                             HorizontalOptions="FillAndExpand"
                             BackgroundColor="Moccasin"
                             Command="{Binding PopCurrentPage}"/>

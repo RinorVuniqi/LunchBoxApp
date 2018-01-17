@@ -7,7 +7,7 @@
                                 BackgroundColor="Orange">
 
     <pages:OrderPage.ToolbarItems>
-        <ToolbarItem Text="Delete product &#x1F5D1;  " Command="{Binding DeleteSelectedProduct}" />
+        <ToolbarItem Text="Delete product &#x1F5D1;  " Command="{Binding DeleteSelectedProduct}" IsEnabled="{Binding OrderProcessing}" />
     </pages:OrderPage.ToolbarItems>
     
     <ContentPage.Content>
@@ -24,7 +24,8 @@
                     <ListView ItemsSource="{Binding OrderedProducts}"
                               SelectedItem="{Binding SelectedProduct}"
                               BackgroundColor="LightYellow"
-                              HeightRequest="200">
+                              HeightRequest="200"
+                              IsEnabled="{Binding OrderProcessing}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>
@@ -54,15 +55,15 @@
                 <BoxView HeightRequest="1" 
                          BackgroundColor="DarkGray"/>
                 <Label Text="Betaalmethode: "/>
-                <Picker ItemsSource="{Binding PaymentNames}" SelectedItem="{Binding SelectedPayment}" BackgroundColor="LightYellow"/>
+                <Picker ItemsSource="{Binding PaymentNames}" SelectedItem="{Binding SelectedPayment}" IsEnabled="{Binding OrderProcessing}" BackgroundColor="LightYellow"/>
 
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Ter plaatse komen leveren:" HorizontalOptions="Start"/>
-                    <Switch IsToggled="{Binding DeliverToCompany}" HorizontalOptions="EndAndExpand"/>
+                    <Switch IsToggled="{Binding DeliverToCompany}" IsEnabled="{Binding OrderProcessing}" HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
-                <Entry Text="{Binding CompanyName}" Placeholder="Bedrijfsnaam" IsVisible="{Binding DeliverToCompany}" BackgroundColor="LightYellow"/>
+                <Entry Text="{Binding CompanyName}" Placeholder="Bedrijfsnaam" IsVisible="{Binding DeliverToCompany}" BackgroundColor="LightYellow" IsEnabled="{Binding OrderProcessing}"/>
 
-                <Button Text="Bestel!" BackgroundColor="Moccasin" Command="{Binding SubmitOrder}" />
+                <Button Text="Bestel" BackgroundColor="Moccasin" Command="{Binding SubmitOrder}" IsEnabled="{Binding OrderProcessing}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

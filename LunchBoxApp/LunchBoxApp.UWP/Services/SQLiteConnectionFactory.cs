@@ -1,4 +1,4 @@
-﻿using SQLite.Net;
+﻿using SQLite;
 using SQLite.Net.Interop;
 using SQLite.Net.Platform.WinRT;
 using System.IO;
@@ -17,12 +17,7 @@ namespace LunchBoxApp.UWP.Services
             string path = ApplicationData.Current.LocalFolder.Path;
             path = Path.Combine(path, databaseFileName);
 
-            return new SQLiteConnection(
-                new SQLitePlatformWinRT(),
-                path,
-                SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite,
-                storeDateTimeAsTicks: false
-            );
+            return new SQLiteConnection(path);
         }
     }
 }

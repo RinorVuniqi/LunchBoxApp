@@ -34,13 +34,14 @@ namespace LunchBoxApp.Domain.Models
         [NotNull]
         public string ImageUrl { get; set; }
 
-        [Ignore, OneToMany(CascadeOperations = CascadeOperation.All)]
+        [TextBlob(nameof(IngredientsBlobbed))]
         public List<string> Ingredients { get; set; }
+        public string IngredientsBlobbed { get; set; } //serialized Ingredients
 
         [ForeignKey(typeof(Subcategory))]
         public Guid SubcategoryId { get; set; }
 
-        [Ignore, ManyToOne(nameof(SubcategoryId))]
+        [ManyToOne(nameof(SubcategoryId))]
         public Subcategory Subcategory { get; set; }
     }
 }

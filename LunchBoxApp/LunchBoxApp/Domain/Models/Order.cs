@@ -17,7 +17,7 @@ namespace LunchBoxApp.Domain.Models
         [NotNull]
         public int OrderTotalProductCount { get; set; }
 
-        [Ignore, NotNull]
+        [NotNull]
         public Payment OrderPayment { get; set; }
 
         [MaxLength(50)]

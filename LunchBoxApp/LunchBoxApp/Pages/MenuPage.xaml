@@ -10,7 +10,7 @@
     </pages:MenuPage.ToolbarItems>
         
     <ContentPage.Content>
-        <ScrollView Margin="5">
+        <ScrollView Margin="5" ChildAdded="Element_OnChildAdded" >
             <StackLayout VerticalOptions="Start"
                          HorizontalOptions="FillAndExpand"
                          BackgroundColor="LightGoldenrodYellow"
@@ -21,8 +21,8 @@
                              BackgroundColor="LightYellow">
                     <StackLayout Orientation="Vertical" 
                                  Margin="2">
-                        <Label Text="Aantal producten:"/>
-                        <Label Text="Totaale prijs:"/>
+                        <Label Text="Producten:"/>
+                        <Label Text="Prijs:"/>
                     </StackLayout>
                     <StackLayout Orientation="Vertical" Margin="2">
                         <Label Text="{Binding TotalProductsInOrderedProducts}" 
@@ -30,7 +30,7 @@
                         <Label Text="{Binding TotalPriceInOrderedProducts, StringFormat='€ {0:N}'}" 
                                HorizontalOptions="EndAndExpand"/>
                     </StackLayout>
-                    <Button Text="Bestel!" 
+                    <Button Text="Volgende  &#x25B6;"
                             Command ="{Binding FinishCurrentOrder}"
                             IsVisible="{Binding OrderButtonVisible}"
                             BackgroundColor="Moccasin" 
@@ -99,12 +99,12 @@
                                            Margin="5" 
                                            HeightRequest="50"/>
                                     <Label Text="{Binding ProductName}" 
-                                           Margin="5" 
+                                           Margin="2" 
                                            FontSize="14"/>
 
                                     <Label Text="{Binding ProductPrice, StringFormat='€ {0:N}'}" 
                                            VerticalOptions="Start" 
-                                           HorizontalOptions="EndAndExpand" Margin="5"/>
+                                           HorizontalOptions="EndAndExpand" Margin="2"/>
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

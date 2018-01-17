@@ -19,7 +19,7 @@ namespace LunchBoxApp.Services
             client = new SmtpClient();
         }
 
-        public async Task<bool> SendEmail(Order order)
+        public async Task<bool> SendEmail(Order order, User user)
         {
             await Task.Delay(0);
 
@@ -30,7 +30,9 @@ namespace LunchBoxApp.Services
             client.Credentials = login;
 
             mail.Subject = $"Bestelling: {order.OrderId}";
-            mail.Body = $"Betaalmethode: {order.OrderPayment.PaymentName}{Environment.NewLine}" +
+            mail.Body = $"Gebruiker: {user.UserName}{Environment.NewLine}" +
+                        $"Email: {user.UserEmail}{Environment.NewLine}" +
+                        $"Betaalmethode: {order.OrderPayment.PaymentName}{Environment.NewLine}" +
                         $"Levering: {order.OrderCompanyName}{Environment.NewLine}" +
                         $"Totaal: {order.OrderTotalProductCount} St | € {order.OrderTotalPrice}{Environment.NewLine}{Environment.NewLine}";
 

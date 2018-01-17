@@ -14,7 +14,7 @@ namespace LunchBoxApp.Domain.Models
         [NotNull, MaxLength(50)]
         public string SubcategoryName { get; set; }
 
-        [Ignore, OneToMany(CascadeOperations = CascadeOperation.All)]
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Product> Products { get; set; }
 
         [NotNull]
@@ -23,7 +23,7 @@ namespace LunchBoxApp.Domain.Models
         [ForeignKey(typeof(Category))]
         public Guid CategoryId { get; set; }
 
-        [Ignore, ManyToOne(nameof(CategoryId))]
+        [ManyToOne(nameof(CategoryId))]
         public Category Category { get; set; }
     }
 }

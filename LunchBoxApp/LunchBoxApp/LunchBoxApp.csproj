@@ -5,12 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="7.3.3" />
+    <PackageReference Include="FluentValidation" Version="7.3.4" />
     <PackageReference Include="FreshMvvm" Version="2.2.3" />
+    <PackageReference Include="sqlite-net-pcl" Version="1.5.166-beta" />
     <PackageReference Include="SQLite.Net-PCL" Version="3.1.1" />
     <PackageReference Include="SQLite.Net.Core-PCL" Version="3.1.1" />
     <PackageReference Include="SQLiteNetExtensions" Version="2.0.0" />
-    <PackageReference Include="Xamarin.Forms" Version="2.5.0.121934" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,14 +45,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Mono.Android">
-      <HintPath>..\..\..\..\..\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v7.1\Mono.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.Android.Support.Annotations">
-      <HintPath>C:\Users\Rinor\.nuget\packages\xamarin.android.support.annotations\25.4.0.2\lib\MonoAndroid70\Xamarin.Android.Support.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="Xamarin.iOS">
-      <HintPath>..\..\..\..\..\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\Xamarin.iOS\v1.0\Xamarin.iOS.dll</HintPath>
-    </Reference>
+    <Folder Include="Properties\" />
   </ItemGroup>
 </Project>

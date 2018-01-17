@@ -18,10 +18,13 @@ namespace LunchBoxApp.Pages
 			InitializeComponent ();
 		}
 
+	    private ScrollView _scrollView;
+
 	    private void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
 	    {
             ((ListView) sender).SelectedItem = null;
-	    }
+	        _scrollView.ScrollToAsync(0, 1000, true);
+        }
 
 	    protected override void OnAppearing()
 	    {
@@ -30,5 +33,10 @@ namespace LunchBoxApp.Pages
 
             base.OnAppearing();
 	    }
+
+	    private void Element_OnChildAdded(object sender, ElementEventArgs e)
+	    {
+	        _scrollView = ((ScrollView)sender);
+        }
 	}
 }
