@@ -83,7 +83,7 @@ namespace LunchBoxApp.PageModels
                 if (value)
                 {
                     ProductPrice += 0.30m;
-                    ProductNote = ProductNote + "-Meergranenbrood\n";
+                    ProductNote += "-Meergranenbrood\n";
                 }
                 else
                 {
@@ -103,7 +103,6 @@ namespace LunchBoxApp.PageModels
             {
                 _selectedItem = value;
 
-
                 if (_selectedItem != null)
                 {
                     string editIngredient = $"-Geen {value}\n";
@@ -114,7 +113,7 @@ namespace LunchBoxApp.PageModels
                     }
                     else
                     {
-                        ProductNote = ProductNote + editIngredient;
+                        ProductNote += editIngredient;
                     }
 
                     _selectedItem = null;
