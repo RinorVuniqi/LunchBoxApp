@@ -81,25 +81,29 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 connection.Insert(new Category
                     {
                         CategoryId = new Constants().Category1Guid,
-                        CategoryName = "Broodjes"
-                    });
+                        CategoryName = "Broodjes",
+                        ImageUrl = "https://i.gyazo.com/53c9732d5d7ddd2c6930c280c0741d3d.png"
+                });
 
                 connection.Insert(new Category
                 {
                     CategoryId = new Constants().Category2Guid,
-                    CategoryName = "Salades, Pastas & Snacks"
+                    CategoryName = "Salades, Pastas & Snacks",
+                    ImageUrl = "https://i.gyazo.com/34588c393daf67de6d11b4e70813eaad.png"
                 });
 
                 connection.Insert(new Category
                 {
                     CategoryId = new Constants().Category3Guid,
-                    CategoryName = "Dessert & Ontbijt"
+                    CategoryName = "Dessert & Ontbijt",
+                    ImageUrl = "https://i.gyazo.com/bbbc74b660b2d6c61cd36959b8cb33bd.png"
                 });
 
                 connection.Insert(new Category
                 {
                     CategoryId = new Constants().Category4Guid,
-                    CategoryName = "Dranken"
+                    CategoryName = "Dranken",
+                    ImageUrl = "https://i.gyazo.com/620cdf58213e034fda28cb102ae84430.png"
                 });
             }
             catch (Exception e)

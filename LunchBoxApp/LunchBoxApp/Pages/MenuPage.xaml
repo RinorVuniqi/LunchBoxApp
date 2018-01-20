@@ -4,113 +4,127 @@
              xmlns:freshMvvm="clr-namespace:FreshMvvm;assembly=FreshMvvm"
              xmlns:pages="clr-namespace:LunchBoxApp.Pages;assembly=LunchBoxApp"
              x:Class="LunchBoxApp.Pages.MenuPage"
-                                BackgroundColor="Orange">
+                                BackgroundColor="#2a241d">
     <pages:MenuPage.ToolbarItems>
         <ToolbarItem Text="Reset order 	&#x2672;  " Command="{Binding ResetOrder}" />
     </pages:MenuPage.ToolbarItems>
-        
+
     <ContentPage.Content>
-        <ScrollView Margin="5" ChildAdded="Element_OnChildAdded" >
-            <StackLayout VerticalOptions="Start"
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" 
+                         Margin="10, 10, 10, 0"
+                         BackgroundColor="#564a3e">
+                <StackLayout Orientation="Vertical" 
+                             Margin="5">
+                    <Label Text="Producten:"
+                           TextColor="#ffffff"/>
+                    <Label Text="Prijs:"
+                           TextColor="#ffffff"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" Margin="5" HorizontalOptions="Fill" WidthRequest="60">
+                    <Label Text="{Binding TotalProductsInOrderedProducts}"
+                           TextColor="#ffffff"
+                           HorizontalOptions="EndAndExpand"/>
+                    <Label Text="{Binding TotalPriceInOrderedProducts, StringFormat='€ {0:N}'}"
+                           TextColor="#ffffff"
+                           HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <Button Text="  Volgende  &#x25B6;  "
+                        Command ="{Binding FinishCurrentOrder}"
+                        IsVisible="{Binding OrderButtonVisible}"
+                        TextColor="#ffffff"
+                        BackgroundColor="#015a82" 
+                        HorizontalOptions="EndAndExpand"
+                        Margin="5"/>
+            </StackLayout>
+
+            <ScrollView Margin="5" ChildAdded="Element_OnChildAdded" >
+                <StackLayout VerticalOptions="Start"
                          HorizontalOptions="FillAndExpand"
-                         BackgroundColor="LightGoldenrodYellow"
+                         BackgroundColor="#564a3e"
                          Padding="20"
                          Margin="5">
-                
-                <StackLayout Orientation="Horizontal" 
-                             BackgroundColor="LightYellow">
-                    <StackLayout Orientation="Vertical" 
-                                 Margin="2">
-                        <Label Text="Producten:"/>
-                        <Label Text="Prijs:"/>
-                    </StackLayout>
-                    <StackLayout Orientation="Vertical" Margin="2">
-                        <Label Text="{Binding TotalProductsInOrderedProducts}" 
-                               HorizontalOptions="EndAndExpand"/>
-                        <Label Text="{Binding TotalPriceInOrderedProducts, StringFormat='€ {0:N}'}" 
-                               HorizontalOptions="EndAndExpand"/>
-                    </StackLayout>
-                    <Button Text="Volgende  &#x25B6;"
-                            Command ="{Binding FinishCurrentOrder}"
-                            IsVisible="{Binding OrderButtonVisible}"
-                            BackgroundColor="Moccasin" 
-                            HorizontalOptions="FillAndExpand"/>
-                </StackLayout>
-
-                <BoxView HeightRequest="1" 
+                    <BoxView HeightRequest="1" 
                          BackgroundColor="DarkGray"/>
 
-                <ListView ItemsSource="{Binding Categories}" 
+                    <ListView ItemsSource="{Binding Categories}" 
                           SelectedItem="{Binding SelectedCategory}" 
-                          BackgroundColor="LightGoldenrodYellow" 
-                          HeightRequest="{Binding CategoryHeight}" 
-                          SeparatorColor="LightGray">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding CategoryName}" 
+                          BackgroundColor="#56483e" 
+                          HeightRequest="{Binding CategoryHeight}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="{Binding ImageUrl}"
+                                           Margin="5" 
+                                           HeightRequest="50"/>
+                                        <Label Text="{Binding CategoryName}"
+                                           TextColor="#ffffff"
                                            Margin="5"
                                            FontSize="20" 
                                            FontAttributes="Bold"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-                <BoxView HeightRequest="1" 
+                    <BoxView HeightRequest="1" 
                          BackgroundColor="DarkGray"/>
 
-                <ListView ItemsSource="{Binding Subcategories}" 
+                    <ListView ItemsSource="{Binding Subcategories}" 
                           SelectedItem="{Binding SelectedSubcategory}" 
-                          BackgroundColor="LightGoldenrodYellow" 
+                          BackgroundColor="#564a3e" 
                           HeightRequest="{Binding SubcategoryHeight}"
                           ItemTapped="ListView_OnItemTapped">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal">
-                                    <Image Source="{Binding ImageUrl}"
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="{Binding ImageUrl}"
                                            Margin="5" 
                                            HeightRequest="50"/>
-                                    <Label Text="{Binding SubcategoryName}" 
+                                        <Label Text="{Binding SubcategoryName}"
+                                           TextColor="#ffffff"
                                            Margin="5" 
                                            FontSize="18" />
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
 
-                <BoxView HeightRequest="1" 
+                    <BoxView HeightRequest="1" 
                          BackgroundColor="DarkGray"/>
 
-                <ListView ItemsSource="{Binding Products}" 
+                    <ListView ItemsSource="{Binding Products}" 
                           SelectedItem="{Binding SelectedProduct}" 
-                          BackgroundColor="LightGoldenrodYellow" 
+                          BackgroundColor="#564a3e" 
                           HeightRequest="{Binding ProductHeight}" 
                           ItemTapped="ListView_OnItemTapped">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell >
-                                <StackLayout Orientation="Horizontal">
-                                    <Image Source="{Binding ImageUrl}" 
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell >
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="{Binding ImageUrl}" 
                                            Margin="5" 
                                            HeightRequest="50"/>
-                                    <Label Text="{Binding ProductName}" 
+                                        <Label Text="{Binding ProductName}"
+                                           TextColor="#ffffff"
                                            Margin="2" 
                                            FontSize="14"/>
 
-                                    <Label Text="{Binding ProductPrice, StringFormat='€ {0:N}'}" 
+                                        <Label Text="{Binding ProductPrice, StringFormat='€ {0:N}'}" 
+                                           TextColor="#ffffff"
                                            VerticalOptions="Start" 
                                            HorizontalOptions="EndAndExpand" Margin="2"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackLayout>
-        </ScrollView>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
     </ContentPage.Content>
 </freshMvvm:FreshBaseContentPage>

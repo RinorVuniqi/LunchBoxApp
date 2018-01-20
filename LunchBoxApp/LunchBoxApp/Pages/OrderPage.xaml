@@ -4,7 +4,7 @@
              xmlns:freshMvvm="clr-namespace:FreshMvvm;assembly=FreshMvvm"
              xmlns:pages="clr-namespace:LunchBoxApp.Pages;assembly=LunchBoxApp"
              x:Class="LunchBoxApp.Pages.OrderPage"
-                                BackgroundColor="Orange">
+                                BackgroundColor="#2a241d">
 
     <pages:OrderPage.ToolbarItems>
         <ToolbarItem Text="Delete product &#x1F5D1;  " Command="{Binding DeleteSelectedProduct}" IsEnabled="{Binding OrderProcessing}" />
@@ -14,16 +14,17 @@
         <ScrollView Margin="5">
             <StackLayout VerticalOptions="Start"
                          HorizontalOptions="FillAndExpand"
-                         BackgroundColor="LightGoldenrodYellow"
+                         BackgroundColor="#564a3e"
                          Padding="20"
                          Margin="5">
-                <ActivityIndicator Color="Black" 
+                <ActivityIndicator Color="#ffffff" 
                                    IsRunning="{Binding ActivityIndicatorVisible}" 
-                                   IsVisible="{Binding ActivityIndicatorVisible}"/>
+                                   IsVisible="{Binding ActivityIndicatorVisible}"
+                                   Margin="0, 0, 0, 5"/>
                 <ScrollView>
                     <ListView ItemsSource="{Binding OrderedProducts}"
                               SelectedItem="{Binding SelectedProduct}"
-                              BackgroundColor="LightYellow"
+                              BackgroundColor="#adaa9c"
                               HeightRequest="200"
                               IsEnabled="{Binding OrderProcessing}">
                         <ListView.ItemTemplate>
@@ -48,22 +49,32 @@
                     </ListView>
                 </ScrollView>
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="{Binding OrderTotalCount, StringFormat='Aantal artikels: {0}'}" HorizontalOptions="Start" Margin="0, 0, 10, 0"/>
-                    <Label Text="{Binding OrderTotalPrice, StringFormat='Prijs: € {0:N}'}" HorizontalOptions="EndAndExpand"/>
+                    <Label Text="{Binding OrderTotalCount, StringFormat='Aantal artikels: {0}'}" HorizontalOptions="Start" Margin="0, 0, 10, 0" TextColor="#ffffff"/>
+                    <Label Text="{Binding OrderTotalPrice, StringFormat='Prijs: € {0:N}'}" HorizontalOptions="EndAndExpand" TextColor="#ffffff"/>
                 </StackLayout>
 
                 <BoxView HeightRequest="1" 
                          BackgroundColor="DarkGray"/>
-                <Label Text="Betaalmethode: "/>
-                <Picker ItemsSource="{Binding PaymentNames}" SelectedItem="{Binding SelectedPayment}" IsEnabled="{Binding OrderProcessing}" BackgroundColor="LightYellow"/>
+                <Label Text="Betaalmethode:" TextColor="#ffffff"/>
+                <Picker ItemsSource="{Binding PaymentNames}" SelectedItem="{Binding SelectedPayment}" IsEnabled="{Binding OrderProcessing}" BackgroundColor="#adaa9c"/>
 
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Ter plaatse komen leveren:" HorizontalOptions="Start"/>
-                    <Switch IsToggled="{Binding DeliverToCompany}" IsEnabled="{Binding OrderProcessing}" HorizontalOptions="EndAndExpand"/>
+                    <Button Text="Afhalen"
+                            TextColor="#ffffff"
+                            HorizontalOptions="FillAndExpand" 
+                            Command="{Binding Pickup}" 
+                            BackgroundColor="{Binding SelectedPickupButton}" 
+                            IsEnabled="{Binding OrderProcessing}"/>
+                    <Button Text="Leveren" 
+                            TextColor="#ffffff"
+                            HorizontalOptions="FillAndExpand" 
+                            Command="{Binding Deliver}" 
+                            BackgroundColor="{Binding SelectedDeliverButton}" 
+                            IsEnabled="{Binding OrderProcessing}"/>
                 </StackLayout>
-                <Entry Text="{Binding CompanyName}" Placeholder="Bedrijfsnaam" IsVisible="{Binding DeliverToCompany}" BackgroundColor="LightYellow" IsEnabled="{Binding OrderProcessing}"/>
-
-                <Button Text="Bestel" BackgroundColor="Moccasin" Command="{Binding SubmitOrder}" IsEnabled="{Binding OrderProcessing}"/>
+                <Entry Text="{Binding CompanyName}" Placeholder="Bedrijfsnaam" IsVisible="{Binding DeliverToCompany}" BackgroundColor="#adaa9c" IsEnabled="{Binding OrderProcessing}"/>
+                <Label Text="{Binding CompanyNameError}" IsVisible="{Binding CompanyNameErrorVisible}" TextColor="LightPink" FontSize="12"/>
+                <Button Text="Bestel" BackgroundColor="#015a82" TextColor="#ffffff" Command="{Binding SubmitOrder}" IsEnabled="{Binding OrderProcessing}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -201,7 +201,19 @@ namespace LunchBoxApp.PageModels
             var categories = await _categoryService.GetAllCategories();
             Categories = null;
             Categories = new ObservableCollection<Category>(categories);
-            CategoryHeight = Categories.Count * 45;
+
+            switch (Device.RuntimePlatform)
+            {
+                case Device.Android:
+                    CategoryHeight = Categories.Count * 45;
+                    break;
+                case Device.UWP:
+                    CategoryHeight = Categories.Count * 60;
+                    break;
+                default:
+                    CategoryHeight = Categories.Count * 50;
+                    break;
+            }
         }
 
         /// <summary>
@@ -220,7 +232,19 @@ namespace LunchBoxApp.PageModels
 
                 var subcategories = await _subcategoryService.GetSubcategoriesByCategoryId(SelectedCategory.CategoryId);
                 Subcategories = new ObservableCollection<Subcategory>(subcategories);
-                SubcategoryHeight = Subcategories.Count * 45;
+                
+                switch (Device.RuntimePlatform)
+                {
+                    case Device.Android:
+                        SubcategoryHeight = Subcategories.Count * 45;
+                        break;
+                    case Device.UWP:
+                        SubcategoryHeight = Subcategories.Count * 60;
+                        break;
+                    default:
+                        SubcategoryHeight = Subcategories.Count * 50;
+                        break;
+                }
             }
         }
 
@@ -236,6 +260,19 @@ namespace LunchBoxApp.PageModels
                 Products = null;
                 Products = new ObservableCollection<Product>(products);
                 ProductHeight = Products.Count * 45;
+
+                switch (Device.RuntimePlatform)
+                {
+                    case Device.Android:
+                        ProductHeight = Products.Count * 45;
+                        break;
+                    case Device.UWP:
+                        ProductHeight = Products.Count * 60;
+                        break;
+                    default:
+                        ProductHeight = Products.Count * 50;
+                        break;
+                }
             }
         }
 

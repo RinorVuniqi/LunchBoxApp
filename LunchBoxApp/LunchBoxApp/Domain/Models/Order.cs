@@ -20,6 +20,9 @@ namespace LunchBoxApp.Domain.Models
         [NotNull]
         public Payment OrderPayment { get; set; }
 
+        [NotNull]
+        public bool DeliverySelected { get; set; }
+
         [MaxLength(50)]
         public string OrderCompanyName { get; set; }
 

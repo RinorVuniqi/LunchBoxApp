@@ -3,75 +3,96 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:freshMvvm="clr-namespace:FreshMvvm;assembly=FreshMvvm"
              x:Class="LunchBoxApp.Pages.RegisterPage"
-                                BackgroundColor="Orange">
+                                BackgroundColor="#2a241d">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout VerticalOptions="FillAndExpand"
                          HorizontalOptions="FillAndExpand"
-                         BackgroundColor="LightGoldenrodYellow"
+                         BackgroundColor="#564a3e"
                          Padding="20"
                          Margin="10">
 
-                <Label Text="RegisterPage" 
-                   TextColor="Black" 
-                   FontSize="25"/>
+                <Label Text="	&#128214;  Registreer je!" 
+                       TextColor="#ffffff" 
+                       FontSize="20"
+                       FontAttributes="Bold"/>
 
                 <Entry Text="{Binding Username}" 
-                   Placeholder="Gebruikersnaam"/>
+                       Placeholder="Gebruikersnaam"
+                       TextColor="#ffffff"
+                       PlaceholderColor="#b7b7b7"
+                       BackgroundColor="#564a3e"/>
 
                 <Label Text="{Binding UserUsernameError}"
                        IsVisible="{Binding UserUsernameErrorVisible}"
                        FontSize="12"
-                       TextColor="Red"/>
+                       TextColor="LightPink"/>
 
                 <Entry Text="{Binding Email}" 
                        Placeholder="Email"
-                       Keyboard="Email"/>
+                       Keyboard="Email"
+                       TextColor="#ffffff"
+                       PlaceholderColor="#b7b7b7"
+                       BackgroundColor="#564a3e"/>
 
                 <Label Text="{Binding UserEmailError}"
                        IsVisible="{Binding UserEmailErrorVisible}"
                        FontSize="12"
-                       TextColor="Red"/>
+                       TextColor="LightPink"/>
 
                 <Entry Text="{Binding FirstName}" 
-                       Placeholder="Voornaam"/>
+                       Placeholder="Voornaam"
+                       TextColor="#ffffff"
+                       PlaceholderColor="#b7b7b7"
+                       BackgroundColor="#564a3e"/>
 
                 <Label Text="{Binding UserFirstNameError}"
                        IsVisible="{Binding UserFirstNameErrorVisible}"
                        FontSize="12"
-                       TextColor="Red"/>
+                       TextColor="LightPink"/>
 
                 <Entry Text="{Binding LastName}" 
-                   Placeholder="Achternaam"/>
+                   Placeholder="Achternaam"
+                       TextColor="#ffffff"
+                       PlaceholderColor="#b7b7b7"
+                       BackgroundColor="#564a3e"/>
 
                 <Label Text="{Binding UserLastNameError}"
                        IsVisible="{Binding UserLastNameErrorVisible}"
                        FontSize="12"
-                       TextColor="Red"/>
+                       TextColor="LightPink"/>
 
                 <Entry Text="{Binding Password1}"
                        Placeholder="Wachtwoord"
-                       IsPassword="True"/>
+                       IsPassword="True"
+                       TextColor="#ffffff"
+                       PlaceholderColor="#b7b7b7"
+                       BackgroundColor="#564a3e"/>
 
                 <Entry Text="{Binding Password2}"
                        Placeholder="Wachtwoord"
-                       IsPassword="True"/>
+                       IsPassword="True"
+                       TextColor="#ffffff"
+                       PlaceholderColor="#b7b7b7"
+                       BackgroundColor="#564a3e"/>
 
                 <Label Text="{Binding UserPasswordError}"
                        IsVisible="{Binding UserPasswordErrorVisible}"
                        FontSize="12"
-                       TextColor="Red"/>
+                       TextColor="LightPink"/>
 
                 <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
 
                     <Button Text="&#x25C0;  Terug" 
                             HorizontalOptions="FillAndExpand"
-                            BackgroundColor="Moccasin"
+                            BackgroundColor="#015a82"
+                            TextColor="#ffffff"
                             Command="{Binding PopCurrentPage}"/>
 
                     <Button Text="Indienen"
                             HorizontalOptions="FillAndExpand"
-                            BackgroundColor="Moccasin"
+                            BackgroundColor="#015a82"
+                            TextColor="#ffffff"
                             Command="{Binding CreateNewUser}"/>
 
                 </StackLayout>

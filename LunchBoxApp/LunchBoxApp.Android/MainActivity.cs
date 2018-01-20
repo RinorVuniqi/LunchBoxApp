@@ -5,7 +5,7 @@ using static Xamarin.Forms.Forms;
 
 namespace LunchBoxApp.Droid
 {
-    [Activity(Label = "LunchBoxApp", 
+    [Activity(Label = "Lunch Box", 
         Icon = "@drawable/icon", 
         Theme = "@style/MainTheme", 
         MainLauncher = true, 

@@ -3,35 +3,44 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:freshMvvm="clr-namespace:FreshMvvm;assembly=FreshMvvm"
              x:Class="LunchBoxApp.Pages.ProductPage"
-                                BackgroundColor="Orange">
+                                BackgroundColor="#2a241d">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView Margin="5">
             <StackLayout VerticalOptions="Start"
                          HorizontalOptions="FillAndExpand"
-                         BackgroundColor="LightGoldenrodYellow"
+                         BackgroundColor="#564a3e"
                          Padding="20"
                          Margin="5">
                 <Button Text="Voeg toe" 
-                        BackgroundColor="Moccasin" 
+                        TextColor="#ffffff"
+                        BackgroundColor="#015a82" 
                         Command="{Binding AddProductToOrder}"/>
 
                 <StackLayout Orientation="Horizontal">
                     <StackLayout Orientation="Vertical" HorizontalOptions="Start">
                         <Label Text="{Binding ProductName}" 
+                               TextColor="#ffffff"
                                FontSize="18"/>
                         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" WidthRequest="200">
-                            <Label Text="Aantal:" FontSize="15" 
+                            <Label Text="Aantal:" 
+                                   TextColor="#ffffff"
+                                   FontSize="15" 
                                    VerticalOptions="CenterAndExpand"
                                    HorizontalOptions="Start"/>
-                            <Button Text="&#x25C4;" WidthRequest="30" BackgroundColor="Moccasin" Command="{Binding DecreaseQuantity}"/>
-                            <Entry Text="{Binding ProductQuantity}" 
-                                   Keyboard="Numeric" 
-                                   BackgroundColor="LightYellow" 
-                                   IsEnabled="False"
+                            <Button Text="&#x25C4;" WidthRequest="30" 
+                                    TextColor="#ffffff"
+                                    BackgroundColor="#015a82" 
+                                    Command="{Binding DecreaseQuantity}"/>
+                            <Label Text="{Binding ProductQuantity}" 
+                                   BackgroundColor="#adaa9c" 
                                    HorizontalTextAlignment="Center"
-                                   HorizontalOptions="CenterAndExpand"
-                                   WidthRequest="35"/>
-                            <Button Text="&#x25BA;" WidthRequest="30" BackgroundColor="Moccasin" Command="{Binding IncreaseQuantity}"/>
+                                   VerticalTextAlignment="Center"
+                                   HorizontalOptions="Center"
+                                   WidthRequest="30"/>
+                            <Button Text="&#x25BA;" WidthRequest="30" 
+                                    TextColor="#ffffff"
+                                    BackgroundColor="#015a82" 
+                                    Command="{Binding IncreaseQuantity}"/>
                         </StackLayout>
                     </StackLayout>
                     <Image Source="{Binding ProductImageUrl}" 
@@ -41,41 +50,57 @@
                            WidthRequest="100"/>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="Naam:" Margin="0, 0, 20, 0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                    <Entry Placeholder="Naam (optioneel)" Text="{Binding ProductPersonName}" 
-                           HorizontalOptions="FillAndExpand" 
-                           BackgroundColor="LightYellow" />
+                <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                    <Label Text="Prijs:" 
+                           TextColor="#ffffff"
+                           FontSize="15" 
+                           HorizontalOptions="StartAndExpand"/>
+                    <Label Text=""/>
+                    <Label Text="{Binding TotalProductPrice, StringFormat='€ {0:N}'}"
+                           TextColor="#ffffff"
+                           HorizontalOptions="End" 
+                           HeightRequest="15"/>
                 </StackLayout>
 
+                <BoxView HeightRequest="1" 
+                         BackgroundColor="#adaa9c"
+                         Margin="0, 5, 0, 5"/>
+
+                <StackLayout Orientation="Horizontal">
+                    <Entry Placeholder="Naam (optioneel)" 
+                           TextColor="#ffffff"
+                           PlaceholderColor="#ffffff"
+                           Text="{Binding ProductPersonName}" 
+                           HorizontalOptions="FillAndExpand" 
+                           BackgroundColor="#564a3e" />
+                </StackLayout>
 
                 <StackLayout Orientation="Horizontal" IsVisible="{Binding IngredientsVisible}">
-                    <Label Text="Meergranen broodje (+ 30 cent)" Margin="0, 0, 20, 0" HorizontalOptions="Start" VerticalOptions="CenterAndExpand"/>
-                    <Switch IsToggled="{Binding ProductMultigrain}" HorizontalOptions="EndAndExpand"/>
+                    <Label Text="Meergranen broodje (+ 30 cent)" 
+                           TextColor="#ffffff"
+                           Margin="0, 0, 20, 0" 
+                           HorizontalOptions="Start" 
+                           VerticalOptions="CenterAndExpand"/>
+                    <Switch IsToggled="{Binding ProductMultigrain}" 
+                            HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
 
                 <Picker Title="Ingredienten weglaten"
                         ItemsSource="{Binding Ingredients}"
                         SelectedItem="{Binding SelectedItem}" 
-                        BackgroundColor="LightYellow"
+                        BackgroundColor="#adaa9c"
                         HorizontalOptions="Fill"
                         IsVisible="{Binding IngredientsVisible}"/>
 
-                <Label Text="Extra opmerking:" HorizontalOptions="Start" VerticalOptions="End"/>
-                <Editor Text="{Binding ProductNote}" 
-                        HeightRequest="113" 
-                        BackgroundColor="LightYellow" 
-                        Margin="10"/>
+                <Label Text="Extra opmerking:" 
+                       TextColor="#ffffff"
+                       HorizontalOptions="Start" 
+                       VerticalOptions="End"/>
 
-                <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand">
-                    <Label Text="Prijs:" 
-                           FontSize="15" 
-                           HorizontalOptions="StartAndExpand"/>
-                    <Label Text=""/>
-                    <Label Text="{Binding TotalProductPrice, StringFormat='€ {0:N}'}" 
-                           HorizontalOptions="End" 
-                           HeightRequest="15"/>
-                </StackLayout>
+                <Editor Text="{Binding ProductNote}" 
+                        TextColor="Black"
+                        HeightRequest="135" 
+                        BackgroundColor="#adaa9c"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

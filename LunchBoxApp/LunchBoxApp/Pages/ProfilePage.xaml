@@ -3,65 +3,74 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:freshMvvm="clr-namespace:FreshMvvm;assembly=FreshMvvm"
              x:Class="LunchBoxApp.Pages.ProfilePage"
-                                BackgroundColor="Orange">
+                                BackgroundColor="#2a241d">
     <ContentPage.Content>
         <ScrollView Margin="5">
             <StackLayout VerticalOptions="FillAndExpand"
                          HorizontalOptions="FillAndExpand"
-                         BackgroundColor="LightGoldenrodYellow"
+                         BackgroundColor="#564a3e"
                          Padding="20"
                          Margin="5">
 
-                <Label Text="ProfilePage" 
-                   TextColor="Black" 
-                   FontSize="40"/>
+                <Label Text="	&#128214;  Profiel" 
+                   TextColor="#ffffff" 
+                   FontSize="20"/>
 
-                <Label Text="{Binding Username}"/>
+                <Label Text="{Binding Username}"
+                       TextColor="#ffffff"/>
 
-                <Label Text="{Binding Email}"/>
+                <Label Text="{Binding Email}"
+                       TextColor="#ffffff"/>
 
-                <Label Text="{Binding UserEmailError}"
-                       IsVisible="{Binding UserEmailErrorVisible}"
-                       FontSize="12"
-                       TextColor="Red"/>
-
-                <Entry Text="{Binding FirstName}"/>
+                <Entry Text="{Binding FirstName}"
+                       Placeholder="Voornaam"
+                       TextColor="#ffffff"
+                       PlaceholderColor="#b7b7b7"/>
 
                 <Label Text="{Binding UserFirstNameError}"
                        IsVisible="{Binding UserFirstNameErrorVisible}"
                        FontSize="12"
-                       TextColor="Red"/>
+                       TextColor="LightPink"/>
 
-                <Entry Text="{Binding LastName}"/>
+                <Entry Text="{Binding LastName}"
+                       Placeholder="Achternaam"
+                       TextColor="#ffffff"
+                       PlaceholderColor="#b7b7b7"/>
 
                 <Label Text="{Binding UserLastNameError}"
                        IsVisible="{Binding UserLastNameErrorVisible}"
                        FontSize="12"
-                       TextColor="Red"/>
+                       TextColor="LightPink"/>
 
                 <Entry Text="{Binding Password1}"
                        Placeholder="Nieuw wachtwoord"
-                       IsPassword="True"/>
+                       IsPassword="True"
+                       TextColor="#ffffff"
+                       PlaceholderColor="#b7b7b7"/>
 
                 <Entry Text="{Binding Password2}"
                        Placeholder="Nieuw wachtwoord"
-                       IsPassword="True"/>
+                       IsPassword="True"
+                       TextColor="#ffffff"
+                       PlaceholderColor="#b7b7b7"/>
 
                 <Label Text="{Binding UserPasswordError}"
                        IsVisible="{Binding UserPasswordErrorVisible}"
                        FontSize="12"
-                       TextColor="Red"/>
+                       TextColor="LightPink"/>
 
                 <StackLayout Orientation="Horizontal">
 
                     <Button Text="&#x25C0;  Terug" 
                             HorizontalOptions="FillAndExpand"
-                            BackgroundColor="Moccasin"
+                            TextColor="#ffffff"
+                            BackgroundColor="#015a82"
                             Command="{Binding PopCurrentPage}"/>
 
                     <Button Text="Indienen"
                             HorizontalOptions="FillAndExpand"
-                            BackgroundColor="Moccasin"
+                            TextColor="#ffffff"
+                            BackgroundColor="#015a82"
                             Command="{Binding SaveCurrentUser}"/>
 
                 </StackLayout>

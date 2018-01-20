@@ -14,6 +14,9 @@ namespace LunchBoxApp.Domain.Models
         [NotNull, MaxLength(50)]
         public string CategoryName { get; set; }
 
+        [NotNull]
+        public string ImageUrl { get; set; }
+
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Subcategory> Subcategories { get; set; }
     }

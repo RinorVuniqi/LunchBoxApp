@@ -229,7 +229,6 @@ namespace LunchBoxApp.PageModels
             {
                 if (error.PropertyName == nameof(user.UserName))
                 {
-
                     UserUsernameError = error.ErrorMessage;
                 }
 

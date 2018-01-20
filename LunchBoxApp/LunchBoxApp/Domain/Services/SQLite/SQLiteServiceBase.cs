@@ -18,6 +18,12 @@ namespace LunchBoxApp.Domain.Services.SQLite
             var connectionFactory = DependencyService.Get<ISQLiteConnectionFactory>();
             connection = connectionFactory.CreateConnection("lunchboxdata.db3");
 
+            //drop tables to update data (not users, those we want to store)
+            connection.DropTable<Category>();
+            connection.DropTable<Subcategory>();
+            connection.DropTable<Product>();
+            connection.DropTable<Payment>();
+
             //create tables (if not existing)
             connection.CreateTable<User>();
             connection.CreateTable<Category>();
