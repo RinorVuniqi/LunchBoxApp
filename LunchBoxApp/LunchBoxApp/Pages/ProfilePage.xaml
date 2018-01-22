@@ -25,7 +25,8 @@
                 <Entry Text="{Binding FirstName}"
                        Placeholder="Voornaam"
                        TextColor="#ffffff"
-                       PlaceholderColor="#b7b7b7"/>
+                       PlaceholderColor="#b7b7b7"
+                       BackgroundColor="#564a3e"/>
 
                 <Label Text="{Binding UserFirstNameError}"
                        IsVisible="{Binding UserFirstNameErrorVisible}"
@@ -35,7 +36,8 @@
                 <Entry Text="{Binding LastName}"
                        Placeholder="Achternaam"
                        TextColor="#ffffff"
-                       PlaceholderColor="#b7b7b7"/>
+                       PlaceholderColor="#b7b7b7"
+                       BackgroundColor="#564a3e"/>
 
                 <Label Text="{Binding UserLastNameError}"
                        IsVisible="{Binding UserLastNameErrorVisible}"
@@ -46,13 +48,15 @@
                        Placeholder="Nieuw wachtwoord"
                        IsPassword="True"
                        TextColor="#ffffff"
-                       PlaceholderColor="#b7b7b7"/>
+                       PlaceholderColor="#b7b7b7"
+                       BackgroundColor="#564a3e"/>
 
                 <Entry Text="{Binding Password2}"
                        Placeholder="Nieuw wachtwoord"
                        IsPassword="True"
                        TextColor="#ffffff"
-                       PlaceholderColor="#b7b7b7"/>
+                       PlaceholderColor="#b7b7b7"
+                       BackgroundColor="#564a3e"/>
 
                 <Label Text="{Binding UserPasswordError}"
                        IsVisible="{Binding UserPasswordErrorVisible}"
