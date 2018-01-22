@@ -13,7 +13,8 @@
         <StackLayout>
             <StackLayout Orientation="Horizontal" 
                          Margin="10, 10, 10, 0"
-                         BackgroundColor="#564a3e">
+                         BackgroundColor="#564a3e"
+                         IsVisible="{Binding ProductsInOrderVisible}">
                 <StackLayout Orientation="Vertical" 
                              Margin="5">
                     <Label Text="Producten:"
@@ -31,7 +32,6 @@
                 </StackLayout>
                 <Button Text="  Volgende  &#x25B6;  "
                         Command ="{Binding FinishCurrentOrder}"
-                        IsVisible="{Binding OrderButtonVisible}"
                         TextColor="#ffffff"
                         BackgroundColor="#015a82" 
                         HorizontalOptions="EndAndExpand"

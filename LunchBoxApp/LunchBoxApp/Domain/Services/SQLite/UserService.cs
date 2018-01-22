@@ -114,7 +114,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                     UserFirstName = "Rinor",
                     UserLastName = "Vuniqi",
                     UserEmail = "rinor.vuniqi@hotmail.com",
-                    UserPassword = "rinor556"
+                    UserPassword = "rinor"
                 });
             }
             catch (Exception e)

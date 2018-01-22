@@ -51,7 +51,7 @@ namespace LunchBoxApp.PageModels
             {
                 _totalProductsInOrderedProducts = value;
                 RaisePropertyChanged(nameof(TotalProductsInOrderedProducts));
-                RaisePropertyChanged(nameof(OrderButtonVisible));
+                RaisePropertyChanged(nameof(ProductsInOrderVisible));
             }
         }
 
@@ -65,7 +65,7 @@ namespace LunchBoxApp.PageModels
             }
         }
 
-        public bool OrderButtonVisible => CheckTotalOrdersValue(TotalProductsInOrderedProducts);
+        public bool ProductsInOrderVisible => CheckTotalOrdersValue(TotalProductsInOrderedProducts);
         private bool CheckTotalOrdersValue(int i) { return i > 0; }
         //End Ordered Products
 
