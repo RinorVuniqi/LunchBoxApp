@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using LunchBoxApp.Domain.Models;
 using LunchBoxApp.Domain.Services.Abstract;
 using LunchBoxApp.Domain.Services.SQLite;
+using Newtonsoft.Json;
 
 namespace LunchBoxApp.Domain.Services.SQLite
 {
@@ -16,20 +19,21 @@ namespace LunchBoxApp.Domain.Services.SQLite
 
         public UserService()
         {
-            try
-            {
-                Users = connection.Table<User>().ToList();
+            Task.Run(GetJson);
+            //try
+            //{
+            //    Users = connection.Table<User>().ToList();
 
-                if (Users.Count == 0)
-                {
-                    GenerateData();
-                    Users = connection.Table<User>().ToList();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            //    if (Users.Count == 0)
+            //    {
+            //        GenerateData();
+            //        Users = connection.Table<User>().ToList();
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //}
         }
 
         /// <summary>
@@ -103,24 +107,47 @@ namespace LunchBoxApp.Domain.Services.SQLite
             connection.InsertOrReplace(user);
         }
 
-        private void GenerateData()
+        private async Task GetJson()
         {
             try
             {
-                connection.Insert(new User
+                string url = new Constants().url + "users";
+
+                HttpClient httpClient = new HttpClient();
+                HttpResponseMessage response = await httpClient.GetAsync(new Uri(url));
+
+                if (response.IsSuccessStatusCode)
                 {
-                    UserId = Guid.NewGuid(),
-                    UserName = "Rinor",
-                    UserFirstName = "Rinor",
-                    UserLastName = "Vuniqi",
-                    UserEmail = "rinor.vuniqi@hotmail.com",
-                    UserPassword = "rinor"
-                });
+                    string content = await response.Content.ReadAsStringAsync();
+                    Users = JsonConvert.DeserializeObject<List<User>>(content);
+                }
             }
+
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Debug.WriteLine(e.ToString());
             }
+
         }
+
+        //private void GenerateData()
+        //{
+        //    try
+        //    {
+        //        connection.Insert(new User
+        //        {
+        //            UserId = Guid.NewGuid(),
+        //            UserName = "Rinor",
+        //            UserFirstName = "Rinor",
+        //            UserLastName = "Vuniqi",
+        //            UserEmail = "rinor.vuniqi@hotmail.com",
+        //            UserPassword = "rinor"
+        //        });
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e);
+        //    }
+        //}
     }
 }

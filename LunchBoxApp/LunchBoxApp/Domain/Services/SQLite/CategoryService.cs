@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using LunchBoxApp.Domain.Models;
 using LunchBoxApp.Domain.Services.Abstract;
+using Newtonsoft.Json;
 
 namespace LunchBoxApp.Domain.Services.SQLite
 {
@@ -14,25 +17,28 @@ namespace LunchBoxApp.Domain.Services.SQLite
         private readonly ISubcategoryService _subcategoryService;
         private static ObservableCollection<Subcategory> Subcategories;
 
+        private static List<Category> Categories = new List<Category>();
+
         /// <summary>
         /// Generate categories
         /// </summary>
-        private static List<Category> Categories = new List<Category>();
-
         public CategoryService()
         {
-            Categories = connection.Table<Category>().ToList();
+            Task.Run(() => GetJson());
 
-            if (Categories.Count == 0)
-            {
-                GenerateData();
-                Categories = connection.Table<Category>().ToList();
-            }
+            //This code was beeing used to save the data locally & generate data incase it was empty, we do no longer do this - instead we'll contact an API which returns us a JSON
+            //Categories = connection.Table<Category>().ToList();
+            //if (Categories.Count == 0)
+            //{
+            //    GenerateData();
+            //    Categories = connection.Table<Category>().ToList();
+            //}
 
             _subcategoryService = new SubcategoryService();
 
             //Fill in here your subcategory list by using the ISubcategoryService - following method fills the categories up with their subcategories
             GetAllSubcategories();
+            
 
             foreach (var category in Categories)
             {
@@ -44,6 +50,33 @@ namespace LunchBoxApp.Domain.Services.SQLite
                     subcategory.Category = category;
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets all the categories in Json format & converts them to Category objects
+        /// </summary>
+        /// <returns></returns>
+        private async Task GetJson()
+        {
+            try
+            {
+                string url = new Constants().url + "categories";
+
+                HttpClient httpClient = new HttpClient();
+                HttpResponseMessage response = await httpClient.GetAsync(new Uri(url));
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Categories = JsonConvert.DeserializeObject<List<Category>>(content);
+                }
+            }
+
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
+
         }
 
         /// <summary>
@@ -74,42 +107,42 @@ namespace LunchBoxApp.Domain.Services.SQLite
             Subcategories = new ObservableCollection<Subcategory>(subcategories);
         }
 
-        private void GenerateData()
-        {
-            try
-            {
-                connection.Insert(new Category
-                    {
-                        CategoryId = new Constants().Category1Guid,
-                        CategoryName = "Broodjes",
-                        ImageUrl = "https://i.gyazo.com/53c9732d5d7ddd2c6930c280c0741d3d.png"
-                });
+        //private void GenerateData()
+        //{
+        //    try
+        //    {
+        //        connection.Insert(new Category
+        //        {
+        //            CategoryId = new Constants().Category1Guid,
+        //            CategoryName = "Broodjes",
+        //            ImageUrl = "https://i.gyazo.com/53c9732d5d7ddd2c6930c280c0741d3d.png"
+        //        });
 
-                connection.Insert(new Category
-                {
-                    CategoryId = new Constants().Category2Guid,
-                    CategoryName = "Salades, Pastas & Snacks",
-                    ImageUrl = "https://i.gyazo.com/34588c393daf67de6d11b4e70813eaad.png"
-                });
+        //        connection.Insert(new Category
+        //        {
+        //            CategoryId = new Constants().Category2Guid,
+        //            CategoryName = "Salades, Pastas & Snacks",
+        //            ImageUrl = "https://i.gyazo.com/34588c393daf67de6d11b4e70813eaad.png"
+        //        });
 
-                connection.Insert(new Category
-                {
-                    CategoryId = new Constants().Category3Guid,
-                    CategoryName = "Dessert & Ontbijt",
-                    ImageUrl = "https://i.gyazo.com/bbbc74b660b2d6c61cd36959b8cb33bd.png"
-                });
+        //        connection.Insert(new Category
+        //        {
+        //            CategoryId = new Constants().Category3Guid,
+        //            CategoryName = "Dessert & Ontbijt",
+        //            ImageUrl = "https://i.gyazo.com/bbbc74b660b2d6c61cd36959b8cb33bd.png"
+        //        });
 
-                connection.Insert(new Category
-                {
-                    CategoryId = new Constants().Category4Guid,
-                    CategoryName = "Dranken",
-                    ImageUrl = "https://i.gyazo.com/620cdf58213e034fda28cb102ae84430.png"
-                });
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
+        //        connection.Insert(new Category
+        //        {
+        //            CategoryId = new Constants().Category4Guid,
+        //            CategoryName = "Dranken",
+        //            ImageUrl = "https://i.gyazo.com/620cdf58213e034fda28cb102ae84430.png"
+        //        });
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e);
+        //    }
+        //}
     }
 }

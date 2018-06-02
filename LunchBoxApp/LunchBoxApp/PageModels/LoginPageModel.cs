@@ -69,16 +69,16 @@ namespace LunchBoxApp.PageModels
                     var user = await _userService.GetLoginUser(Username, Password);
                     Debug.WriteLine($"{user.UserId.ToString()} {user.UserName} {user.UserPassword} {user.UserEmail}");
 
-                    Username = "";
-                    Password = "";
+                    //Username = "";
+                    //Password = "";
                     await CoreMethods.PushPageModel<MainPageModel>(user);
                 }
 
                 catch
                 {
                     LoginErrorMessage = "Verkeerde login informatie";
-                    //Username = "Rinor";
-                    //Password = "rinor";
+                    Username = "Rinor";
+                    Password = "rinor";
                 }
             });
 

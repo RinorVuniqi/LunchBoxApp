@@ -37,6 +37,7 @@ namespace LunchBoxApp.PageModels
         private Color _selectedButton;
         private Color _selectedDeliverButton;
         private string _companyNameError;
+        private User _orderUser;
 
         //Start Order & Ordered products
         public Order Order
@@ -91,6 +92,16 @@ namespace LunchBoxApp.PageModels
 
         public ObservableCollection<Payment> Payments { get; set; }
         public List<string> PaymentNames { get; set; }
+
+        public User OrderUser
+        {
+            get { return _orderUser; }
+            set
+            {
+                _orderUser = value;
+                Order.OrderUser = value;
+            }
+        }
 
         public string SelectedPayment
         {
@@ -199,6 +210,7 @@ namespace LunchBoxApp.PageModels
                 OrderedProducts = new ObservableCollection<Product>(Order.Products);
                 OrderTotalPrice = Order.OrderTotalPrice;
                 OrderTotalCount = Order.OrderTotalProductCount;
+                OrderUser = _userService.GetCurrentUser().Result;
                 OrderProcessing = true;
                 Order.DeliverySelected = false;
                 ActivityIndicatorVisible = false;
@@ -335,8 +347,7 @@ namespace LunchBoxApp.PageModels
 
                             await Task.Run(async () =>
                             {
-                                emailSent = await email.SendEmail(_orderService.GetOrder().Result,
-                                    _userService.GetCurrentUser().Result);
+                                emailSent = await email.SendEmail(_orderService.GetOrder().Result);
                             });
 
                             ActivityIndicatorVisible = false;

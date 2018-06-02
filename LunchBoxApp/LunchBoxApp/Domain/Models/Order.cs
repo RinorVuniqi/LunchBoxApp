@@ -26,7 +26,12 @@ namespace LunchBoxApp.Domain.Models
         [MaxLength(50)]
         public string OrderCompanyName { get; set; }
 
+        [NotNull]
+        public User OrderUser { get; set; }
+
         [Ignore, OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Product> Products { get; set; }
+
+        
     }
 }

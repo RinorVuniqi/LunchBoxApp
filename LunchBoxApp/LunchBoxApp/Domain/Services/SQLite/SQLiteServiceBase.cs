@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using LunchBoxApp.Domain.Models;
 using LunchBoxApp.Domain.Services.Abstract;
 using SQLite;
 using Xamarin.Forms;
+using Newtonsoft.Json;
 
 namespace LunchBoxApp.Domain.Services.SQLite
 {
@@ -30,6 +35,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
             connection.CreateTable<Subcategory>();
             connection.CreateTable<Product>();
             connection.CreateTable<Payment>();
+
         }
     }
 }

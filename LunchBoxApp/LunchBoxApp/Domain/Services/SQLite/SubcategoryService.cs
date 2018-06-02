@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using LunchBoxApp.Domain.Models;
 using LunchBoxApp.Domain.Services.Abstract;
+using Newtonsoft.Json;
 
 namespace LunchBoxApp.Domain.Services.SQLite
 {
@@ -21,13 +24,16 @@ namespace LunchBoxApp.Domain.Services.SQLite
 
         public SubcategoryService()
         {
-            Subcategories = connection.Table<Subcategory>().ToList();
+            Task.Run(() => GetJson());
 
-            if (Subcategories.Count == 0)
-            {
-                GenerateData();
-                Subcategories = connection.Table<Subcategory>().ToList();
-            }
+            //This code was beeing used to save the data locally & generate data incase it was empty, we do no longer do this - instead we'll contact an API which returns us a JSON
+            //Subcategories = connection.Table<Subcategory>().ToList();
+
+            //if (Subcategories.Count == 0)
+            //{
+            //    GenerateData();
+            //    Subcategories = connection.Table<Subcategory>().ToList();
+            //}
 
             _productService = new ProductService();
 
@@ -44,6 +50,33 @@ namespace LunchBoxApp.Domain.Services.SQLite
                     product.Subcategory = subcategory;
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets all the subcategories in Json format & converts them to Subcategory objects
+        /// </summary>
+        /// <returns></returns>
+        private async Task GetJson()
+        {
+            try
+            {
+                string url = new Constants().url + "subcategories";
+
+                HttpClient httpClient = new HttpClient();
+                HttpResponseMessage response = await httpClient.GetAsync(new Uri(url));
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    Subcategories = JsonConvert.DeserializeObject<List<Subcategory>>(content);
+                }
+            }
+
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
+
         }
 
         /// <summary>
@@ -89,90 +122,90 @@ namespace LunchBoxApp.Domain.Services.SQLite
         }
 
 
-        private void GenerateData()
-        {
-            List<Subcategory> subcategoriesSeeding = new List<Subcategory>()
-            {
-                new Subcategory()
-                {
-                    SubcategoryId = new Constants().Subcategory1Guid,
-                    SubcategoryName = "Kaas",
-                    CategoryId = new Constants().Category1Guid,
-                    ImageUrl = "https://i.gyazo.com/dcb57ffbe1abcb79a1b041d051e73537.png"
-                },
-                new Subcategory()
-                {
-                    SubcategoryId = new Constants().Subcategory2Guid,
-                    SubcategoryName = "Vis",
-                    CategoryId = new Constants().Category1Guid,
-                    ImageUrl = "https://i.gyazo.com/696e7727867ff08405bc6de8fbf79cf9.png"
-                },
-                new Subcategory()
-                {
-                    SubcategoryId = new Constants().Subcategory3Guid,
-                    SubcategoryName = "Vlees",
-                    CategoryId = new Constants().Category1Guid,
-                    ImageUrl = "https://i.gyazo.com/42e96441e0073c3529fa601f53c1d190.png"
-                },
-                new Subcategory()
-                {
-                    SubcategoryId = new Constants().Subcategory4Guid,
-                    SubcategoryName = "Kip",
-                    CategoryId = new Constants().Category1Guid,
-                    ImageUrl = "https://i.gyazo.com/ef7f85efe0561a167279a95dcff6a57c.png"
-                },
-                new Subcategory()
-                {
-                    SubcategoryId = new Constants().Subcategory5Guid,
-                    SubcategoryName = "Panini's",
-                    CategoryId = new Constants().Category2Guid,
-                    ImageUrl = "https://i.gyazo.com/108f1afbe8b92fe3d4e63cc403138d75.png"
-                },
-                new Subcategory()
-                {
-                    SubcategoryId = new Constants().Subcategory6Guid,
-                    SubcategoryName = "Salades",
-                    CategoryId = new Constants().Category2Guid,
-                    ImageUrl = "https://i.gyazo.com/cbd4c73d7e4f934334cde7f23110da86.png"
-                },
-                new Subcategory()
-                {
-                    SubcategoryId = new Constants().Subcategory7Guid,
-                    SubcategoryName = "Pasta's",
-                    CategoryId = new Constants().Category2Guid,
-                    ImageUrl = "https://i.gyazo.com/75558717c726461ab7070fe03f2d5419.png"
-                },
-                new Subcategory()
-                {
-                    SubcategoryId = new Constants().Subcategory8Guid,
-                    SubcategoryName = "Snacks",
-                    CategoryId = new Constants().Category2Guid,
-                    ImageUrl = "https://i.gyazo.com/50d9352a192bd73b0eac7389d58eaeae.png"
-                },
-                new Subcategory()
-                {
-                    SubcategoryId = new Constants().Subcategory9Guid,
-                    SubcategoryName = "Dessert",
-                    CategoryId = new Constants().Category3Guid,
-                    ImageUrl = "https://i.gyazo.com/bbde00ac13f5a5a3aaeae7c1a628f0c8.png"
-                },
-                new Subcategory()
-                {
-                    SubcategoryId = new Constants().Subcategory10Guid,
-                    SubcategoryName = "Ontbijt",
-                    CategoryId = new Constants().Category3Guid,
-                    ImageUrl = "https://i.gyazo.com/bbbc74b660b2d6c61cd36959b8cb33bd.png"
-                },
-                new Subcategory()
-                {
-                    SubcategoryId = new Constants().Subcategory11Guid,
-                    SubcategoryName = "Warme dranken",
-                    CategoryId = new Constants().Category4Guid,
-                    ImageUrl = "https://i.gyazo.com/52e9e60f205c73e46149fcbd0eba0ffc.png"
-                }
-            };
+        //private void GenerateData()
+        //{
+        //    List<Subcategory> subcategoriesSeeding = new List<Subcategory>()
+        //    {
+        //        new Subcategory()
+        //        {
+        //            SubcategoryId = new Constants().Subcategory1Guid,
+        //            SubcategoryName = "Kaas",
+        //            CategoryId = new Constants().Category1Guid,
+        //            ImageUrl = "https://i.gyazo.com/dcb57ffbe1abcb79a1b041d051e73537.png"
+        //        },
+        //        new Subcategory()
+        //        {
+        //            SubcategoryId = new Constants().Subcategory2Guid,
+        //            SubcategoryName = "Vis",
+        //            CategoryId = new Constants().Category1Guid,
+        //            ImageUrl = "https://i.gyazo.com/696e7727867ff08405bc6de8fbf79cf9.png"
+        //        },
+        //        new Subcategory()
+        //        {
+        //            SubcategoryId = new Constants().Subcategory3Guid,
+        //            SubcategoryName = "Vlees",
+        //            CategoryId = new Constants().Category1Guid,
+        //            ImageUrl = "https://i.gyazo.com/42e96441e0073c3529fa601f53c1d190.png"
+        //        },
+        //        new Subcategory()
+        //        {
+        //            SubcategoryId = new Constants().Subcategory4Guid,
+        //            SubcategoryName = "Kip",
+        //            CategoryId = new Constants().Category1Guid,
+        //            ImageUrl = "https://i.gyazo.com/ef7f85efe0561a167279a95dcff6a57c.png"
+        //        },
+        //        new Subcategory()
+        //        {
+        //            SubcategoryId = new Constants().Subcategory5Guid,
+        //            SubcategoryName = "Panini's",
+        //            CategoryId = new Constants().Category2Guid,
+        //            ImageUrl = "https://i.gyazo.com/108f1afbe8b92fe3d4e63cc403138d75.png"
+        //        },
+        //        new Subcategory()
+        //        {
+        //            SubcategoryId = new Constants().Subcategory6Guid,
+        //            SubcategoryName = "Salades",
+        //            CategoryId = new Constants().Category2Guid,
+        //            ImageUrl = "https://i.gyazo.com/cbd4c73d7e4f934334cde7f23110da86.png"
+        //        },
+        //        new Subcategory()
+        //        {
+        //            SubcategoryId = new Constants().Subcategory7Guid,
+        //            SubcategoryName = "Pasta's",
+        //            CategoryId = new Constants().Category2Guid,
+        //            ImageUrl = "https://i.gyazo.com/75558717c726461ab7070fe03f2d5419.png"
+        //        },
+        //        new Subcategory()
+        //        {
+        //            SubcategoryId = new Constants().Subcategory8Guid,
+        //            SubcategoryName = "Snacks",
+        //            CategoryId = new Constants().Category2Guid,
+        //            ImageUrl = "https://i.gyazo.com/50d9352a192bd73b0eac7389d58eaeae.png"
+        //        },
+        //        new Subcategory()
+        //        {
+        //            SubcategoryId = new Constants().Subcategory9Guid,
+        //            SubcategoryName = "Dessert",
+        //            CategoryId = new Constants().Category3Guid,
+        //            ImageUrl = "https://i.gyazo.com/bbde00ac13f5a5a3aaeae7c1a628f0c8.png"
+        //        },
+        //        new Subcategory()
+        //        {
+        //            SubcategoryId = new Constants().Subcategory10Guid,
+        //            SubcategoryName = "Ontbijt",
+        //            CategoryId = new Constants().Category3Guid,
+        //            ImageUrl = "https://i.gyazo.com/bbbc74b660b2d6c61cd36959b8cb33bd.png"
+        //        },
+        //        new Subcategory()
+        //        {
+        //            SubcategoryId = new Constants().Subcategory11Guid,
+        //            SubcategoryName = "Warme dranken",
+        //            CategoryId = new Constants().Category4Guid,
+        //            ImageUrl = "https://i.gyazo.com/52e9e60f205c73e46149fcbd0eba0ffc.png"
+        //        }
+        //    };
 
-            connection.InsertAll(subcategoriesSeeding);
-        }
+        //    connection.InsertAll(subcategoriesSeeding);
+        //}
     }
 }

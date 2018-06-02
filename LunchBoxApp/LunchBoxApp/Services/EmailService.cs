@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
+using System.Net.Http;
 using System.Net.Mail;
+using System.Text;
 using System.Threading.Tasks;
 using LunchBoxApp.Domain.Models;
+using Newtonsoft.Json;
 
 namespace LunchBoxApp.Services
 {
@@ -19,7 +23,7 @@ namespace LunchBoxApp.Services
             client = new SmtpClient();
         }
 
-        public async Task<bool> SendEmail(Order order, User user)
+        public async Task<bool> SendEmail(Order order)
         {
             await Task.Delay(0);
 
@@ -30,8 +34,8 @@ namespace LunchBoxApp.Services
             client.Credentials = login;
 
             mail.Subject = $"Bestelling: {order.OrderId}";
-            mail.Body = $"Gebruiker: {user.UserName}{Environment.NewLine}" +
-                        $"Email: {user.UserEmail}{Environment.NewLine}" +
+            mail.Body = $"Gebruiker: {order.OrderUser.UserName}{Environment.NewLine}" +
+                        $"Email: {order.OrderUser.UserEmail}{Environment.NewLine}" +
                         $"Betaalmethode: {order.OrderPayment.PaymentName}{Environment.NewLine}" +
                         $"Levering: {order.OrderCompanyName}{Environment.NewLine}" +
                         $"Totaal: {order.OrderTotalProductCount} St | € {order.OrderTotalPrice}{Environment.NewLine}{Environment.NewLine}";
@@ -61,12 +65,27 @@ namespace LunchBoxApp.Services
             try
             {
                 client.Send(mail);
+                await PostOrder(order);
                 return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 return false;
+            }
+        }
+
+        public async Task PostOrder(Order order)
+        {
+            await Task.Delay(0);
+            var jsonData = JsonConvert.SerializeObject(order);
+
+            using (var client = new HttpClient())
+            {
+                var respnonse = await client.PostAsync(
+                    new Constants().url + "/orders",
+                    new StringContent(jsonData, Encoding.UTF8, "application/json"));
+                Debug.WriteLine(respnonse.ToString());
             }
         }
     }
