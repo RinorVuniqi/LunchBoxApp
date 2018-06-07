@@ -6,8 +6,8 @@ namespace LunchBoxApp
 {
     public class Constants
     {
-        public string url = "http://172.31.37.42:8080/api/";
-        //public string url = "http://172.31.37.56:8080/api/";
+        public string url = "http://192.168.1.55:8080/api/";
+
         /// <summary>
         /// Broodjes
         /// </summary>

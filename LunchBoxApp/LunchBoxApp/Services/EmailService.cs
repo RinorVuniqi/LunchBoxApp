@@ -82,10 +82,10 @@ namespace LunchBoxApp.Services
 
             using (var client = new HttpClient())
             {
-                var respnonse = await client.PostAsync(
+                var response = await client.PostAsync(
                     new Constants().url + "/orders",
                     new StringContent(jsonData, Encoding.UTF8, "application/json"));
-                Debug.WriteLine(respnonse.ToString());
+                Debug.WriteLine(response.ToString());
             }
         }
     }

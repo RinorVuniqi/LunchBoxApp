@@ -91,7 +91,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 connection.InsertOrReplace(_user);
             }
 
-            var test = connection.Table<User>().ToList();
+            await PutUser(user);
         }
 
         /// <summary>
@@ -105,6 +105,7 @@ namespace LunchBoxApp.Domain.Services.SQLite
             Users.Add(user);
             LoggedInUser = user;
             connection.InsertOrReplace(user);
+            await PostUser(user);
         }
 
         private async Task GetJson()
@@ -128,6 +129,35 @@ namespace LunchBoxApp.Domain.Services.SQLite
                 Debug.WriteLine(e.ToString());
             }
 
+        }
+
+        public async Task PostUser(User user)
+        {
+            await Task.Delay(0);
+            var jsonData = JsonConvert.SerializeObject(user);
+
+            using (var client = new HttpClient())
+            {
+                var response = await client.PostAsync(
+                    new Constants().url + "/users",
+                    new StringContent(jsonData, Encoding.UTF8, "application/json"));
+                Debug.WriteLine(response.ToString());
+            }
+        }
+
+        public async Task PutUser(User user)
+        {
+            await Task.Delay(0);
+            var jsonData = JsonConvert.SerializeObject(user);
+
+            using (var client = new HttpClient())
+            {
+                
+                var response = await client.PutAsync(
+                    new Constants().url + "/users/" + user.UserId,
+                    new StringContent(jsonData, Encoding.UTF8, "application/json"));
+                Debug.WriteLine(response.ToString());
+            }
         }
 
         //private void GenerateData()
